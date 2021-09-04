@@ -3,7 +3,7 @@ from tortoise.models import Model as OldModel
 
 import asyncio
 import logging
-from inspect import getmembers, isfunction
+from inspect import getmembers
 from types import ModuleType
 from tortoise.log import logger
 
@@ -42,6 +42,7 @@ class _Cli:
     attach the cli interface with 
     flask app for tortoise orm.
     """
+    @staticmethod
     @c.command('generate-schemas')
     def generate_schemas() -> None: 
         """Populate DB with Tortoise-ORM schemas."""
@@ -54,7 +55,7 @@ class _Cli:
         loop = asyncio.get_event_loop()
         loop.run_until_complete(clier())
 
-class _Tortoise():
+class _Tortoise:
     """
     register the flask app and the other configs with the tortoise instance.
     """
@@ -94,6 +95,8 @@ class _Tortoise():
             if self._generate_schemas:
                 logger.info("Tortoise-ORM generating schema")
                 await NewTortoise.generate_schemas()
+        print (self.app.config)
+        self.app.cli.add_command(_Cli.generate_schemas)
 
 
 class Tortoise(_Tortoise, ConfigureBase):
@@ -121,16 +124,8 @@ class Tortoise(_Tortoise, ConfigureBase):
         db_uri = app.config["TORTOISE_DATABASE_URI"]
         db_modules = app.config.get("TORTOISE_DATABASE_MODULES", {"models": ["__main__"]})
         generate_schemas:bool = app.config.get("TORTOISE_GENERATE_SCHEMAS", False)
-
         super(Tortoise, self).__init__(app, db_uri=db_uri, modules=db_modules, generate_schemas=generate_schemas)
         super(Tortoise, self).register_tortoise()
-
         app.extensions['db'] = self
-
-        _cli = _Cli()
-
-        for member in getmembers(_cli):
-            if isinstance(member[1], c.Command):
-                app.cli.add_command(member[1])
-                
+        # app.cli.add_command(self.generate_schemas)
         return None

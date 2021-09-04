@@ -1,20 +1,21 @@
-from tortoise import Model, fields
-from flask_tortoise import FlaskTortoise
+from flask_tortoise import Tortoise
+from tortoise import fields, Model
 
-db:"FlaskTortoise" = FlaskTortoise()
+db:"Tortoise" = Tortoise()
 
 
-class Users(db.Model):
+
+class Users(Model):
     id = fields.IntField(pk=True)
-    status = db.fields.CharField(20)
+    status = fields.CharField(20)
 
     def __str__(self):
         return f"User {self.id}: {self.status}"
 
 
-class Workers(db.Model):
-    id = db.fields.IntField(pk=True)
-    status = db.fields.CharField(20)
+class Workers(Model):
+    id = fields.IntField(pk=True)
+    status = fields.CharField(20)
 
     def __str__(self):
         return f"Worker {self.id}: {self.status}"

@@ -1,11 +1,15 @@
 from setuptools import setup,find_packages
-
+import click as c
 
 VERSION_INFO = (0, 0, 1)
 AUTHOR = "Aniket Sarkar"
 
 with open("README.md", "r") as f:
     long_description = f.read()
+
+def get_install_requires() -> list:
+    with open("requirements.txt", "r") as f:
+        return [line.rstrip() for line in f]
 
 
 setup(
@@ -23,9 +27,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms="any",
-    install_requires=[ 
-        "tortoise >= 0.1.1"
-    ],
+    install_requires=get_install_requires(),
     extras_require={},
     python_requires=">=3.6,<4",
 

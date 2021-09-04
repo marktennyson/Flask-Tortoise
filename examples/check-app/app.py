@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from models import *
 from random import choice
 from models import db
-from inspect import getfile
 
 
 
@@ -10,10 +9,7 @@ STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
 app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODELS'] = {"models": [app.import_name]}
-print (getfile(app.__class__))
-print (__name__)
-
+app.config['TORTOISE_DATABASE_MODULES'] = {"models": ["models"]}
 
 db.init_app(app)
 
