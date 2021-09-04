@@ -82,7 +82,7 @@ def register_tortoise(
     """
     _generate_schemas = generate_schemas
 
-    @app.before_request
+    @app.before_first_request
     async def init_orm() -> None: 
         await Tortoise.init(config=config, config_file=config_file, db_url=db_url, modules=modules)
         logger.info("Tortoise-ORM started, %s, %s", Tortoise._connections, Tortoise.apps)
@@ -90,10 +90,10 @@ def register_tortoise(
             logger.info("Tortoise-ORM generating schema")
             await Tortoise.generate_schemas()
 
-    @app.teardown_appcontext
-    async def close_orm(*args, **kwargs) -> None: 
-        await Tortoise.close_connections()
-        logger.info("Tortoise-ORM shutdown")
+    # @app.teardown_appcontext
+    # async def close_orm(*args, **kwargs) -> None: 
+    #     await Tortoise.close_connections()
+    #     logger.info("Tortoise-ORM shutdown")
 
     @app.cli.command("generate-schemas") 
     def generate_schemas() -> None: 
