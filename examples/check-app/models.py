@@ -1,5 +1,4 @@
-from flask_tortoise import Tortoise
-from tortoise import fields, Model
+from flask_tortoise import Tortoise, Model, fields
 
 db:"Tortoise" = Tortoise()
 

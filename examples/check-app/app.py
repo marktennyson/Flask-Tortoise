@@ -9,10 +9,9 @@ STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
 app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODULES'] = {"models": ["models"]}
+app.config['TORTOISE_DATABASE_MODELS'] = "models"
 
 db.init_app(app)
-
 
 @app.get("/")
 async def list_all():
@@ -38,6 +37,13 @@ async def add_worker():
 async def get_worker():
     worker:"Workers" = await Workers.get(id=1)
     return str(worker.status)
+
+@app.get("/aniket")
+async def aniket():
+    user = await Users.get_or_404(pk=10)
+    
+    return jsonify(name=str(user))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

@@ -1,23 +1,20 @@
 from tortoise import Tortoise as OldTortoise, fields
-from tortoise.models import Model as OldModel
 
 import asyncio
 import logging
-from inspect import getmembers, isfunction
+from inspect import getmembers
 from types import ModuleType
 from tortoise.log import logger
 
 import typing as t
 import click as c
 
+from .models import Model as Model
+
 if t.TYPE_CHECKING:
     from flask import Flask
 
 
-class Model(OldModel):
-    """
-    the base Model class inherited from `tortoise.models.Model`
-    """
 
 class Fields():
     def __init__(self) -> None:
@@ -74,8 +71,7 @@ class _Tortoise():
         self.db_uri = db_uri
         self.modules = modules
         self._generate_schemas:bool = generate_schemas
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.__init_tortoise())
+
         return None
 
     async def __init_tortoise(self) -> None:
@@ -86,10 +82,26 @@ class _Tortoise():
             modules=self.modules
             )
 
+    def __check_data_type(
+        self, 
+        pv_data:t.Any, 
+        realtype:t.Union[t.Tuple[t.Type], t.Type], 
+        var_name:str
+        ) -> None:
+
+        if pv_data is None:
+            return None
+
+        if not isinstance(pv_data, realtype):
+            raise TypeError(f"`{var_name}` config var takes only {realtype.__name__} type data. Got: {type(pv_data).__name__}")
+
+        return None
+
     def register_tortoise(self) -> None:
 
         @self.app.before_first_request
         async def init_orm() -> None: 
+            await self.__init_tortoise()
             logger.info("Tortoise-ORM started, %s, %s", NewTortoise._connections, NewTortoise.apps)
             if self._generate_schemas:
                 logger.info("Tortoise-ORM generating schema")
@@ -103,7 +115,9 @@ class Tortoise(_Tortoise, ConfigureBase):
         the Flask application
     """
 
-    def __init__(self, app:t.Optional["Flask"]=None) -> None:
+    def __init__(self, app:t.Optional["Flask"]=None) -> None:\
+
+        self.__available_db_models:list = [] # need to add aeirich models here
         
         if app is not None:
             self.init_app(app)
@@ -118,11 +132,46 @@ class Tortoise(_Tortoise, ConfigureBase):
         :param app: 
             the Flask application
         """
-        db_uri = app.config["TORTOISE_DATABASE_URI"]
-        db_modules = app.config.get("TORTOISE_DATABASE_MODULES", {"models": ["__main__"]})
+        db_uri:str = app.config["TORTOISE_DATABASE_URI"]
+        db_models:t.Union[str, list, tuple, None] = app.config.get("TORTOISE_DATABASE_MODELS", None)
+        db_modules:t.Dict[str, t.Iterable[t.Union[str, ModuleType]]] = app.config.get("TORTOISE_DATABASE_MODULES", dict())
+        db_config:t.Optional[dict] = app.config.get("TORTOISE_DATABASE_CONFIG", None)
+        db_config_file:t.Optional[str] = app.config.get("TORTOISE_DATABASE_CONFIG_FILE", None)
         generate_schemas:bool = app.config.get("TORTOISE_GENERATE_SCHEMAS", False)
 
-        super(Tortoise, self).__init__(app, db_uri=db_uri, modules=db_modules, generate_schemas=generate_schemas)
+        _ = self.__check_data_type(db_uri, str, "TORTOISE_DATABASE_URI")
+        _ = self.__check_data_type(db_models, (str, list, tuple), "TORTOISE_DATABASE_MODELS")
+        _ = self.__check_data_type(db_modules, dict, "TORTOISE_DATABASE_MODULES")
+        _ = self.__check_data_type(db_config, dict, "TORTOISE_DATABASE_CONFIG")
+        _ = self.__check_data_type(db_config_file, str, "TORTOISE_DATABASE_CONFIG_FILE")
+        _ = self.__check_data_type(generate_schemas, bool, "TORTOISE_GENERATE_SCHEMAS")
+
+        if db_models is not None:
+            if isinstance(db_models, str):
+                db_models = [db_models]
+        
+            db_models.extend(self.__available_db_models)
+
+        if db_modules.get("models", None) is not None:
+            provided_db_models:t.Optional[list] = db_modules["models"]
+            provided_db_models.extend(db_models)
+            db_modules["models"] = provided_db_models
+
+        else:
+            if len(db_models) < len(self.__available_db_models)+1: 
+                db_models.append("__main__")
+
+            db_modules.update({"models": db_models})
+
+        super(Tortoise, self).__init__(
+            app,
+            config=db_config, 
+            config_file=db_config_file, 
+            db_uri=db_uri, 
+            modules=db_modules, 
+            generate_schemas=generate_schemas
+            )
+
         super(Tortoise, self).register_tortoise()
 
         app.extensions['db'] = self
