@@ -12,6 +12,8 @@ from tortoise.queryset import QuerySetSingle, QuerySet as OldQuerySet
 
 from tortoise.filters import get_filters_for_field
 from tortoise.manager import Manager
+from tortoise.exceptions import DoesNotExist
+from werkzeug.exceptions import NotFound
 from tortoise.fields.base import Field
 from tortoise.fields.data import IntField
 from tortoise.fields.relational import (
@@ -59,14 +61,17 @@ class Model(OldModel):
     """
     the base Model class inherited from `tortoise.models.Model`
     """
+    # print (OldModel._meta.manager)
     _meta = MetaInfo(None)
+    # print (dir(OldModel._meta))
+    # OldModel._meta = _meta
 
     @classmethod
     def _init_from_db(cls: Type[MODEL], **kwargs: Any) -> MODEL:
         self = cls.__new__(cls)
         self._partial = False
         self._saved_in_db = True
-
+        # self._meta = OldModel._meta
         meta = self._meta
 
         try:
@@ -108,4 +113,5 @@ class Model(OldModel):
         :param args: Q functions containing constraints. Will be AND'ed.
         :param kwargs: Simple filter constraints.
         """
+        # cls._meta.manager = Manager()
         return cls._meta.manager.get_queryset().get_or_404(*args, **kwargs)
