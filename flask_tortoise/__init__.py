@@ -58,7 +58,7 @@ class _Tortoise():
             "connections": {"default": self.db_uri},
             "apps": {
                 "models": {
-                    "models": ["models", "aerich.models"],
+                    "models": self.modules['models'],
                     "default_connection": "default",
                 },
             },
@@ -66,7 +66,7 @@ class _Tortoise():
 
         return None
 
-    async def __init_tortoise(self) -> None:
+    async def init_tortoise(self) -> None:
         """
         initialize the tortoise orm.
         """
@@ -96,24 +96,11 @@ class _Tortoise():
 
         @self.app.before_first_request
         async def init_orm() -> None: 
-            await self.__init_tortoise()
+            await self.init_tortoise()
             logger.info("Tortoise-ORM started, %s, %s", Tortoiser._connections, Tortoiser.apps)
             if self._generate_schemas:
                 logger.info("Tortoise-ORM generating schema")
                 await Tortoiser.generate_schemas()
-
-        @self.app.cli.command("generate-schemas")
-        def generate_schemas():
-            """Populate DB with Tortoise-ORM schemas."""
-
-            async def clier() -> None:
-                await self.__init_tortoise()
-                await Tortoiser.generate_schemas()
-                await Tortoiser.close_connections()
-
-            logger.setLevel(logging.DEBUG)
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(clier())
 
     def register_cli_interface(self):
         from .cli import tortoise 
@@ -126,7 +113,7 @@ class Tortoise(_Tortoise, ConfigureBase):
     :param app: 
         the Flask application
     """
-    __available_db_models:list = [] # add custom models here.
+    __available_db_models:list = ["aerich.models"] # add custom models here.
 
     def __init__(self, app:t.Optional["Flask"]=None) -> None:
         
@@ -204,7 +191,7 @@ class Tortoise(_Tortoise, ConfigureBase):
                 db.generate_schemas()
         """
         async def clier() -> None:
-            await self.__init_tortoise()
+            await self.init_tortoise()
             await Tortoiser.generate_schemas()
             await Tortoiser.close_connections()
 

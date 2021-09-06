@@ -7,6 +7,7 @@ db:"Tortoise" = Tortoise()
 class Users(Model):
     id = fields.IntField(pk=True)
     status = fields.CharField(20)
+    # name = fields.CharField(20, null=True)
 
     def __str__(self):
         return f"User {self.id}: {self.status}"

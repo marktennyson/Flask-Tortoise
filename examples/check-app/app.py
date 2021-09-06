@@ -4,7 +4,6 @@ from random import choice
 from models import db
 
 
-
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
