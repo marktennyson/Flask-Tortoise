@@ -1,2 +1,4 @@
-tortoise-orm >= 0.17.7
+tortoise-orm>=0.17.7
 asgiref>=3.4.1
+aerich>=0.5.8
+nc-console>=0.0.4

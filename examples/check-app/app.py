@@ -40,10 +40,10 @@ async def get_worker():
 
 @app.get("/aniket")
 async def aniket():
-    user = await Users.get_or_404(pk=10)
+    user = await Users.get_or_none(pk=1)
     
     return jsonify(name=str(user))
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8080)

@@ -7,7 +7,6 @@ from types import ModuleType
 from tortoise.log import logger
 
 import typing as t
-import click as c
 
 from .models import Model as Model
 
@@ -29,27 +28,10 @@ class ConfigureBase(object):
     
     fields:"Fields" = Fields()
     
-class NewTortoise(OldTortoise):
+class Tortoiser(OldTortoise):
     """
     base Tortoise class inherited from `tortoise.Tortoise`
     """
-
-class _Cli:
-    """
-    attach the cli interface with 
-    flask app for tortoise orm.
-    """
-    @c.command('generate-schemas')
-    def generate_schemas() -> None: 
-        """Populate DB with Tortoise-ORM schemas."""
-
-        async def clier() -> None:
-            await NewTortoise.generate_schemas()
-            await NewTortoise.close_connections()
-
-        logger.setLevel(logging.DEBUG)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(clier())
 
 class _Tortoise():
     """
@@ -72,10 +54,23 @@ class _Tortoise():
         self.modules = modules
         self._generate_schemas:bool = generate_schemas
 
+        self.aerich_config = {
+            "connections": {"default": self.db_uri},
+            "apps": {
+                "models": {
+                    "models": ["models", "aerich.models"],
+                    "default_connection": "default",
+                },
+            },
+        }
+
         return None
 
     async def __init_tortoise(self) -> None:
-        await NewTortoise.init(
+        """
+        initialize the tortoise orm.
+        """
+        await Tortoiser.init(
             config=self.config, 
             config_file=self.config_file, 
             db_url=self.db_uri, 
@@ -102,10 +97,27 @@ class _Tortoise():
         @self.app.before_first_request
         async def init_orm() -> None: 
             await self.__init_tortoise()
-            logger.info("Tortoise-ORM started, %s, %s", NewTortoise._connections, NewTortoise.apps)
+            logger.info("Tortoise-ORM started, %s, %s", Tortoiser._connections, Tortoiser.apps)
             if self._generate_schemas:
                 logger.info("Tortoise-ORM generating schema")
-                await NewTortoise.generate_schemas()
+                await Tortoiser.generate_schemas()
+
+        @self.app.cli.command("generate-schemas")
+        def generate_schemas():
+            """Populate DB with Tortoise-ORM schemas."""
+
+            async def clier() -> None:
+                await self.__init_tortoise()
+                await Tortoiser.generate_schemas()
+                await Tortoiser.close_connections()
+
+            logger.setLevel(logging.DEBUG)
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(clier())
+
+    def register_cli_interface(self):
+        from .cli import tortoise 
+        self.app.cli.add_command(tortoise)
 
 
 class Tortoise(_Tortoise, ConfigureBase):
@@ -114,10 +126,9 @@ class Tortoise(_Tortoise, ConfigureBase):
     :param app: 
         the Flask application
     """
+    __available_db_models:list = [] # add custom models here.
 
-    def __init__(self, app:t.Optional["Flask"]=None) -> None:\
-
-        self.__available_db_models:list = [] # need to add aeirich models here
+    def __init__(self, app:t.Optional["Flask"]=None) -> None:
         
         if app is not None:
             self.init_app(app)
@@ -148,7 +159,7 @@ class Tortoise(_Tortoise, ConfigureBase):
 
         if db_models is not None:
             if isinstance(db_models, str):
-                db_models = [db_models]
+                db_models:t.List[str] = [db_models]
         
             db_models.extend(self.__available_db_models)
 
@@ -171,15 +182,32 @@ class Tortoise(_Tortoise, ConfigureBase):
             modules=db_modules, 
             generate_schemas=generate_schemas
             )
-
+        
         super(Tortoise, self).register_tortoise()
+        super(Tortoise, self).register_cli_interface()
 
-        app.extensions['db'] = self
-
-        _cli = _Cli()
-
-        for member in getmembers(_cli):
-            if isinstance(member[1], c.Command):
-                app.cli.add_command(member[1])
+        app.extensions['tortoise'] = self
                 
         return None
+
+    def generate_schemas(self):
+        """
+        generate the database schemas 
+        with application context.
+
+        :for example::
+
+            from app import app
+            from models import db
+
+            with app.app_context():
+                db.generate_schemas()
+        """
+        async def clier() -> None:
+            await self.__init_tortoise()
+            await Tortoiser.generate_schemas()
+            await Tortoiser.close_connections()
+
+        logger.setLevel(logging.DEBUG)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(clier())
