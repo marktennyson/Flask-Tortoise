@@ -1,6 +1,6 @@
 from tortoise import Tortoise as OldTortoise, fields
 
-import asyncio
+import asyncio as aio
 import logging
 from inspect import getmembers
 from types import ModuleType
@@ -32,6 +32,24 @@ class Tortoiser(OldTortoise):
     """
     base Tortoise class inherited from `tortoise.Tortoise`
     """
+
+class ConnectTortoise:
+    def __init__(self, initializer:t.Dict[str, t.Any]) -> None:
+        self.initializer = initializer
+    
+    async def __enter__(self):
+        await Tortoiser.init(**self.initializer)
+
+
+    async def __exit__(self, *wargs, **kwargs):
+        await Tortoiser.close_connections()
+        
+
+    def __await__(self: "ConnectTortoise") -> t.Generator[t.Any, None, "ConnectTortoise"]:
+        async def _self() -> "ConnectTortoise":
+            return self
+
+        return _self().__await__()
 
 class _Tortoise():
     """
@@ -66,16 +84,21 @@ class _Tortoise():
 
         return None
 
-    async def init_tortoise(self) -> None:
-        """
-        initialize the tortoise orm.
-        """
-        await Tortoiser.init(
+    def _get_kwargs_for_tortoise_initialization(self) -> t.Dict[str, t.Any]:
+        kwargs = dict(
             config=self.config, 
             config_file=self.config_file, 
             db_url=self.db_uri, 
             modules=self.modules
-            )
+        )
+        return kwargs
+
+    async def init_tortoise(self) -> None:
+        """
+        initialize the tortoise orm.
+        """
+        kwargs = self._get_kwargs_for_tortoise_initialization()
+        await Tortoiser.init(**kwargs)
 
     def __check_data_type(
         self, 
@@ -91,6 +114,13 @@ class _Tortoise():
             raise TypeError(f"`{var_name}` config var takes only {realtype.__name__} type data. Got: {type(pv_data).__name__}")
 
         return None
+
+    async def connect(self):
+        """
+        the Tortoise-ORM connection context.
+        """
+        tortoise_initializer_kwargs = self._get_kwargs_for_tortoise_initialization()
+        return await ConnectTortoise(tortoise_initializer_kwargs)
 
     def register_tortoise(self) -> None:
 
@@ -182,6 +212,7 @@ class Tortoise(_Tortoise, ConfigureBase):
                 
         return None
 
+
     def generate_schemas(self):
         """
         generate the database schemas 
@@ -195,11 +226,11 @@ class Tortoise(_Tortoise, ConfigureBase):
             with app.app_context():
                 db.generate_schemas()
         """
-        async def clier() -> None:
+        async def generator() -> None:
             await self.init_tortoise()
             await Tortoiser.generate_schemas()
             await Tortoiser.close_connections()
 
         logger.setLevel(logging.DEBUG)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(clier())
+        loop = aio.get_event_loop()
+        loop.run_until_complete(generator())

@@ -39,8 +39,20 @@ async def get_worker():
 
 @app.get("/aniket")
 async def aniket():
-    user =await Users.get_or_404(pk=17)
+    pk=17
+    user =await Users.get_or_404(pk=pk, description=f"user object not found at ID: {pk}")
     return jsonify(name=str(user))
+
+@app.get("/sarkar")
+async def sarkar():
+    user = await Users.filter(pk=1).first_or_404()
+    return jsonify(name=str(user))
+
+@app.get("/paginate")
+async def paginator():
+    user = await Users.paginate()
+    print (user)
+    return "none"
 
 
 if __name__ == '__main__':

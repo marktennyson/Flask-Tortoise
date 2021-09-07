@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Posts</title>
+  </head>
+  <body>
+
+{% for post in data %}
+<p>
+  {{ post.id }} post body: <b>{{ post.name }}</b>
+</p>
+{% endfor %}
+{% if posts.has_prev %}<a href="{{ url_for('view', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} | 
+{% if posts.has_next %}<a href="{{ url_for('view', page=posts.next_num) }}">Older posts &gt;&gt;</a>{% else %}Older posts &gt;&gt;{% endif %}
+
+  </body>
+</html>
