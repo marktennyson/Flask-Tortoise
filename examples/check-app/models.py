@@ -4,7 +4,6 @@ from flask_tortoise.models import Manager
 db:"Tortoise" = Tortoise()
 
 
-
 class Users(Model):
     id = fields.IntField(pk=True)
     status = fields.CharField(20)

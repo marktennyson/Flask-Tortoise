@@ -39,8 +39,7 @@ async def get_worker():
 
 @app.get("/aniket")
 async def aniket():
-    user = await Users.get_or_404(pk=16)
-    
+    user =await Users.get_or_404(pk=17)
     return jsonify(name=str(user))
 
 
