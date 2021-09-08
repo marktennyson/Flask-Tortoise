@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template
 from models import *
+import click as c
 
 app = Flask(__name__)
 
@@ -24,10 +25,14 @@ async def view():
     # return "none"
     return render_template('view.html',posts=posts, data=data)
 
+@c.group()
+def cli():
+    ...
 
+@cli.command("generate-data")
 def generate_data():
     async def executor():
-        with await db.connect():
+        async with db.connect():
             for i in range(0, 1000):
                 name = f"Post-{i}"
                 body = f"This is the post body, NO: {i}"
@@ -36,8 +41,13 @@ def generate_data():
     import asyncio as aio
     loop=aio.get_event_loop()
     loop.run_until_complete(executor())
+
+
+@cli.command("run")
+def app_run():
+    app.run(debug=True, port=5050)
     
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    cli()

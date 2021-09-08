@@ -34,22 +34,31 @@ class Tortoiser(OldTortoise):
     """
 
 class ConnectTortoise:
+    """
+    intialize the tortoise orm as context of the instance
+    of flask_tortoise.Tortoise class.
+
+    :param initializer:
+        A dictionary type data contains the 
+        initial params for tortoise.Tortoise.init method.
+
+    :for example::
+
+        db = Tortoise(app)
+        async with db.connect():
+            # --do stuffs here--
+            ...
+    """
     def __init__(self, initializer:t.Dict[str, t.Any]) -> None:
         self.initializer = initializer
     
-    async def __enter__(self):
+    async def __aenter__(self):
         await Tortoiser.init(**self.initializer)
 
 
-    async def __exit__(self, *wargs, **kwargs):
+    async def __aexit__(self, *wargs, **kwargs):
         await Tortoiser.close_connections()
         
-
-    def __await__(self: "ConnectTortoise") -> t.Generator[t.Any, None, "ConnectTortoise"]:
-        async def _self() -> "ConnectTortoise":
-            return self
-
-        return _self().__await__()
 
 class _Tortoise():
     """
@@ -93,11 +102,11 @@ class _Tortoise():
         )
         return kwargs
 
-    async def init_tortoise(self) -> None:
+    async def init_tortoise(self, initializer:t.Optional[t.Dict[str, t.Any]]=None) -> None:
         """
         initialize the tortoise orm.
         """
-        kwargs = self._get_kwargs_for_tortoise_initialization()
+        kwargs = initializer or self._get_kwargs_for_tortoise_initialization()
         await Tortoiser.init(**kwargs)
 
     def __check_data_type(
@@ -115,12 +124,25 @@ class _Tortoise():
 
         return None
 
-    async def connect(self):
+    def connect(self, initializer:t.Optional[t.Dict[str, t.Any]]=None) -> "ConnectTortoise":
         """
         the Tortoise-ORM connection context.
+
+        :param initializer:
+        A dictionary type data contains the 
+        initial params for tortoise.Tortoise.init method.
+
+        :for example::
+
+            db = Tortoise(app)
+            
+            async with db.connect():
+                # --do stuffs here--
+                ...
+
         """
-        tortoise_initializer_kwargs = self._get_kwargs_for_tortoise_initialization()
-        return await ConnectTortoise(tortoise_initializer_kwargs)
+        tortoise_initializer_kwargs = initializer or self._get_kwargs_for_tortoise_initialization()
+        return ConnectTortoise(tortoise_initializer_kwargs)
 
     def register_tortoise(self) -> None:
 
@@ -234,3 +256,12 @@ class Tortoise(_Tortoise, ConfigureBase):
         logger.setLevel(logging.DEBUG)
         loop = aio.get_event_loop()
         loop.run_until_complete(generator())
+
+    def remove_schemas(self) -> None:
+        async def remover():
+            await Tortoiser._drop_databases()
+            await Tortoiser.close_connections()
+        
+        logger.setLevel(logging.DEBUG)
+        loop = aio.get_event_loop()
+        loop.run_until_complete(remover())

@@ -175,21 +175,23 @@ async def db_upgrade(ctx: c.Context):
     help="Delete version files at the same time.",
 )
 @c.pass_context
-@c.confirmation_option(
-    prompt="Downgrade is dangerous, which maybe lose your data, are you sure?",
-)
+# @c.confirmation_option(
+#     prompt="Downgrade is dangerous, which maybe lose your data, are you sure?",
+# )
 @complete_async_func
 async def db_downgrade(ctx: c.Context, version: int, delete: bool):
     command = ctx.obj["command"]
+    if Console.input.Boolean("Downgrade is dangerous, which maybe lose your data, are you sure"):
+        try:
+            files = await command.downgrade(version, delete)
 
-    try:
-        files = await command.downgrade(version, delete)
+        except DowngradeError as e:
+            return Console.log.Error(str(e))
 
-    except DowngradeError as e:
-        return Console.log.Error(str(e))
-
-    for file in files:
-        Console.log.Success(f"Success downgrade {file}")
+        for file in files:
+            Console.log.Success(f"Success downgrade {file}")
+    else:
+        Console.log.Error("Aborted!")
 
 
 @tortoise.command("heads", help="Show current available heads in migrate location.")

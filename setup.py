@@ -1,5 +1,5 @@
 from setuptools import setup,find_packages
-import click as c
+
 
 VERSION_INFO = (0, 0, 1)
 AUTHOR = "Aniket Sarkar"
