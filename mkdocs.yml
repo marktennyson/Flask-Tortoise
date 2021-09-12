@@ -36,11 +36,15 @@ plugins:
     data: data
 
 markdown_extensions:
+  - attr_list
   - toc:
       permalink: true
   
   - pymdownx.highlight:
       linenums: false
+    
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 
   - pymdownx.superfences
 
@@ -48,3 +52,5 @@ nav:
   - Flask-Tortoise: index.md
   - QuerySet: queryset.md
   - Examples: examples.md
+  - Tutorial: tutorial.md
+  - Command Line: cli.md
