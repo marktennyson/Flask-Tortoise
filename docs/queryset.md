@@ -48,7 +48,8 @@ async def get_data():
 ```
 
 #### first_or_404
-Like **method** `first` but aborts with 404 if not found instead of returning ``None``.   
+Like **method** `first` but aborts with 404 if not found instead of returning ``None``.  
+ 
 ###### Parameters  
 __args:__ `Q functions containing constraints. Will be AND'ed.`   
 __kwargs:__ `Simple filter constraints.` 

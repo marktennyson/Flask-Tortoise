@@ -8,14 +8,29 @@ from tortoise.log import logger
 
 import typing as t
 
-from .models import Model as Model
+from .models import (
+    Model as Model,
+    Manager as Manager,
+    )
+from .queryset import (
+    Pagination as Pagination,
+    QuerySet as QuerySet,
+)
 
 if t.TYPE_CHECKING:
     from flask import Flask
 
 
+__all__:t.Tuple[str] = (
+    "Model",
+    "Manager",
+    "Pagination",
+    "QuerySet",
+    "Tortoise",
+)
 
-class Fields():
+
+class Fields(object):
     def __init__(self) -> None:
         members:t.List[t.Tuple[str, t.Any]] = getmembers(fields)
         for member in members:
@@ -33,7 +48,7 @@ class Tortoiser(OldTortoise):
     base Tortoise class inherited from `tortoise.Tortoise`
     """
 
-class ConnectTortoise:
+class ConnectTortoise(object):
     """
     intialize the tortoise orm as context of the instance
     of flask_tortoise.Tortoise class.
@@ -60,7 +75,7 @@ class ConnectTortoise:
         await Tortoiser.close_connections()
         
 
-class _Tortoise():
+class _Tortoise(object):
     """
     register the flask app and the other configs with the tortoise instance.
     """
@@ -259,6 +274,7 @@ class Tortoise(_Tortoise, ConfigureBase):
 
     def remove_schemas(self) -> None:
         async def remover():
+            await self.init_tortoise()
             await Tortoiser._drop_databases()
             await Tortoiser.close_connections()
         
