@@ -6,12 +6,8 @@ baseDir = os.path.dirname(os.path.abspath(__file__))
 VERSION_INFO = (0, 0, 1)
 AUTHOR = "Aniket Sarkar"
 
-# with open(os.path.join(baseDir, "README.md"), "r") as f:
-#     long_description = f.read()
-
-# def get_install_requires() -> list:
-#     with open(os.path.join(baseDir, "requirements.txt"), "r") as f:
-#         return [line.rstrip() for line in f]
+with open(os.path.join(baseDir, "README.md"), "r") as f:
+    long_description = f.read()
 
 
 setup(
@@ -22,14 +18,19 @@ setup(
     author=AUTHOR,
     author_email="aniketsarkar@yahoo.com",
     description="Adds Tortoise ORM support for flask app.",
-    # long_description=long_description,
+    long_description=long_description,
     long_description_content_type="text/markdown",
     keywords=["flask", "flask-tortoise", "Tortoise"],
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     platforms="any",
-    # install_requires=get_install_requires(),
+    install_requires=[
+        "tortoise-orm>=0.17.7",
+        "asgiref>=3.4.1",
+        "aerich>=0.5.8",
+        "nc-console>=0.0.4",
+    ],
     extras_require={},
     python_requires=">=3.6,<4",
 

@@ -179,3 +179,35 @@ async def get_worker():
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
 ```
+
+## Available configs
+
+__TORTOISE_DATABASE_URI:__           
+ad the database url here.           
+**Mandatory field**             
+**Type:** `str`           
+
+__TORTOISE_DATABASE_MODELS:__            
+add the name of the all model file.         
+**Default value:** `app.import_name`        
+**Type:** `str`        
+
+__TORTOISE_DATABASE_MODULES:__          
+add the tortoise orm module dict here if you are about to initialize it by modules.        
+**Default value:** `{}`           
+**Type:** `dict`           
+
+__TORTOISE_DATABASE_CONFIG:__     
+Initialize the tortoise Orm with the config dictionary.    
+**Default value:** `{}`      
+**Type:** `dict`      
+
+__TORTOISE_DATABASE_CONFIG_FILE:__
+Initialize the tortoise orm from a config file.    
+**Default value:** `None`   
+**Type:** `optional-str`   
+
+__TORTOISE_GENERATE_SCHEMAS:__     
+generate the schemas at the time of tortoise orm initialization.      
+**Default value:** `False`         
+**Type:** `bool`     

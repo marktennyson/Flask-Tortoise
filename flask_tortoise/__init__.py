@@ -1,4 +1,7 @@
-from tortoise import Tortoise as OldTortoise, fields
+from tortoise import (
+    Tortoise as OldTortoise, 
+    fields
+    )
 
 import asyncio as aio
 import logging
@@ -203,7 +206,7 @@ class Tortoise(_Tortoise, ConfigureBase):
             the Flask application
         """
         db_uri:str = app.config["TORTOISE_DATABASE_URI"]
-        db_models:t.Union[str, list, tuple, None] = app.config.get("TORTOISE_DATABASE_MODELS", None)
+        db_models:t.Union[str, list, tuple] = app.config.get("TORTOISE_DATABASE_MODELS", app.import_name)
         db_modules:t.Dict[str, t.Iterable[t.Union[str, ModuleType]]] = app.config.get("TORTOISE_DATABASE_MODULES", dict())
         db_config:t.Optional[dict] = app.config.get("TORTOISE_DATABASE_CONFIG", None)
         db_config_file:t.Optional[str] = app.config.get("TORTOISE_DATABASE_CONFIG_FILE", None)
@@ -228,10 +231,7 @@ class Tortoise(_Tortoise, ConfigureBase):
             db_modules["models"] = provided_db_models
 
         else:
-            if len(db_models) < len(self.__available_db_models)+1: 
-                db_models.append("__main__")
-
-            db_modules.update({"models": db_models})
+            db_modules["models"] = db_models
 
         super(Tortoise, self).__init__(
             app,
@@ -273,6 +273,13 @@ class Tortoise(_Tortoise, ConfigureBase):
         loop.run_until_complete(generator())
 
     def remove_schemas(self) -> None:
+        """
+        remove(drop) all the created schemas.
+        :for example::
+
+            db.remove_schemas()
+
+        """
         async def remover():
             await self.init_tortoise()
             await Tortoiser._drop_databases()
