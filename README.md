@@ -6,6 +6,8 @@
 
 Tortoise-ORM is one of the best tool to interact with the database asynchronously. It's clean and Django type implementation provides you a better view and understanding of the database ORM system. Also you can use the Pydantic data module to write the error-less code.
 
+The main aim of __Tortoise-ORM__ is to provide the same service and api like the __Django-ORM__.
+
 ### Installing
 Install and update from PYPI:
 ```bash

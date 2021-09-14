@@ -1,11 +1,7 @@
-from tortoise import (
-    Tortoise as OldTortoise, 
-    fields
-    )
+from tortoise import Tortoise as OldTortoise
 
 import asyncio as aio
 import logging
-from inspect import getmembers
 from types import ModuleType
 from tortoise.log import logger
 
@@ -15,12 +11,47 @@ from .models import (
     Model as Model,
     Manager as Manager,
     )
+from .fields import (
+    CASCADE, 
+    RESTRICT, 
+    SET_DEFAULT, 
+    SET_NULL, 
+    Field,
+    BigIntField,
+    BinaryField,
+    BooleanField,
+    CharEnumField,
+    CharField,
+    DateField,
+    DatetimeField,
+    DecimalField,
+    FloatField,
+    IntEnumField,
+    IntField,
+    JSONField,
+    SmallIntField,
+    TextField,
+    TimeDeltaField,
+    UUIDField,
+    BackwardFKRelation,
+    BackwardOneToOneRelation,
+    ForeignKeyField,
+    ForeignKeyNullableRelation,
+    ForeignKeyRelation,
+    ManyToManyField,
+    ManyToManyRelation,
+    OneToOneField,
+    OneToOneNullableRelation,
+    OneToOneRelation,
+    ReverseRelation,
+)
 from .queryset import (
     Pagination as Pagination,
     QuerySet as QuerySet,
 )
 
 if t.TYPE_CHECKING:
+    from tortoise.fields.data import CharEnumType, IntEnumType
     from flask import Flask
 
 
@@ -33,19 +64,297 @@ __all__:t.Tuple[str] = (
 )
 
 
-class Fields(object):
-    def __init__(self) -> None:
-        members:t.List[t.Tuple[str, t.Any]] = getmembers(fields)
-        for member in members:
-            setattr(self, member[0], member[1])
-        return None
+class ConfigureModelAndFields(object):
 
-class ConfigureBase(object):
     class Model(Model):
         ...
+
+    class CASCADE(CASCADE):
+        ...
+
+    class RESTRICT(RESTRICT):
+        ...
+
+    class SET_DEFAULT(SET_DEFAULT):
+        ...
+
+    class SET_NULL(SET_NULL):
+        ...
+
+    class Field(Field):
+        ...
+
+    class BigIntField(BigIntField):
+        ...
     
-    fields:"Fields" = Fields()
+    class BinaryField(BinaryField):
+        ...
+
+    class BooleanField(BooleanField):
+        ...
+
+    def CharEnumField(
+        enum_type: t.Type[CharEnumType],
+        description: t.Optional[str] = None,
+        max_length: int = 0,
+        **kwargs: t.Any,
+    ) -> CharEnumType:
+        """
+        Char Enum Field
+
+        A field representing a character enumeration.
+
+        **Warning**: If ``max_length`` is not specified or equals to zero, the size of represented
+        char fields is automatically detected. So if later you update the enum, you need to update your
+        table schema as well.
+
+        **Note**: Valid str value of ``enum_type`` is acceptable.
+
+        ``enum_type``:
+            The enum class
+        ``description``:
+            The description of the field. It is set automatically if not specified to a multiline list
+            of "name: value" pairs.
+        ``max_length``:
+            The length of the created CharField. If it is zero it is automatically detected from
+            enum_type.
+
+        """
+
+        return CharEnumField(enum_type, description, max_length, **kwargs)
     
+    class CharField(CharField):
+        ...
+
+    class DateField(DateField):
+        ...
+
+    class DatetimeField(DatetimeField):
+        ...
+
+    class DecimalField(DecimalField):
+        ...
+
+    class FloatField(FloatField):
+        ...
+
+    class IntField(IntField):
+        ...
+
+    class JSONField(JSONField):
+        ...
+
+    class SmallIntField(SmallIntField):
+        ...
+
+    class TextField(TextField):
+        ...
+
+    class TimeDeltaField(TimeDeltaField):
+        ...
+
+    class UUIDField(UUIDField):
+        ...
+
+    class BackwardFKRelation(BackwardFKRelation):
+        ...
+
+    class BackwardOneToOneRelation(BackwardOneToOneRelation):
+        ...
+
+    class ManyToManyRelation(ManyToManyRelation):
+        ...
+
+    class ReverseRelation(ReverseRelation):
+        ...
+
+    def IntEnumField(
+        enum_type: t.Type["IntEnumType"],
+        description: t.Optional[str] = None,
+        **kwargs: t.Any,
+        ) -> "IntEnumType":
+        """
+        Enum Field
+
+        A field representing an integer enumeration.
+
+        The description of the field is set automatically if not specified to a multiline list of
+        "name: value" pairs.
+
+        **Note**: Valid int value of ``enum_type`` is acceptable.
+
+        ``enum_type``:
+            The enum class
+        ``description``:
+            The description of the field. It is set automatically if not specified to a multiline list
+            of "name: value" pairs.
+
+        """
+        return IntEnumField(enum_type, description, **kwargs)
+
+    def OneToOneField(
+        model_name: str,
+        related_name: t.Union[t.Optional[str], t.Literal[False]] = None,
+        on_delete: str = CASCADE,
+        db_constraint: bool = True,
+        **kwargs: t.Any,
+    ) -> OneToOneRelation:
+        """
+        OneToOne relation field.
+
+        This field represents a foreign key relation to another model.
+
+        See :ref:`one_to_one` for usage information.
+
+        You must provide the following:
+
+        ``model_name``:
+            The name of the related model in a :samp:`'{app}.{model}'` format.
+
+        The following is optional:
+
+        ``related_name``:
+            The attribute name on the related model to reverse resolve the foreign key.
+        ``on_delete``:
+            One of:
+                ``field.CASCADE``:
+                    Indicate that the model should be cascade deleted if related model gets deleted.
+                ``field.RESTRICT``:
+                    Indicate that the related model delete will be restricted as long as a
+                    foreign key points to it.
+                ``field.SET_NULL``:
+                    Resets the field to NULL in case the related model gets deleted.
+                    Can only be set if field has ``null=True`` set.
+                ``field.SET_DEFAULT``:
+                    Resets the field to ``default`` value in case the related model gets deleted.
+                    Can only be set is field has a ``default`` set.
+        ``to_field``:
+            The attribute name on the related model to establish foreign key relationship.
+            If not set, pk is used
+        ``db_constraint``:
+            Controls whether or not a constraint should be created in the database for this foreign key.
+            The default is True, and that’s almost certainly what you want; setting this to False can be very bad for data integrity.
+        """
+
+        return OneToOneField(
+            model_name, related_name, on_delete, db_constraint=db_constraint, **kwargs
+        )
+
+
+    def ForeignKeyField(
+        model_name: str,
+        related_name: t.Union[t.Optional[str], t.Literal[False]] = None,
+        on_delete: str = CASCADE,
+        db_constraint: bool = True,
+        **kwargs: t.Any,
+    ) -> ForeignKeyRelation:
+        """
+        ForeignKey relation field.
+
+        This field represents a foreign key relation to another model.
+
+        See :ref:`foreign_key` for usage information.
+
+        You must provide the following:
+
+        ``model_name``:
+            The name of the related model in a :samp:`'{app}.{model}'` format.
+
+        The following is optional:
+
+        ``related_name``:
+            The attribute name on the related model to reverse resolve the foreign key.
+        ``on_delete``:
+            One of:
+                ``field.CASCADE``:
+                    Indicate that the model should be cascade deleted if related model gets deleted.
+                ``field.RESTRICT``:
+                    Indicate that the related model delete will be restricted as long as a
+                    foreign key points to it.
+                ``field.SET_NULL``:
+                    Resets the field to NULL in case the related model gets deleted.
+                    Can only be set if field has ``null=True`` set.
+                ``field.SET_DEFAULT``:
+                    Resets the field to ``default`` value in case the related model gets deleted.
+                    Can only be set is field has a ``default`` set.
+        ``to_field``:
+            The attribute name on the related model to establish foreign key relationship.
+            If not set, pk is used
+        ``db_constraint``:
+            Controls whether or not a constraint should be created in the database for this foreign key.
+            The default is True, and that’s almost certainly what you want; setting this to False can be very bad for data integrity.
+        """
+
+        return ForeignKeyField(
+            model_name, related_name, on_delete, db_constraint=db_constraint, **kwargs
+        )
+
+
+    def ManyToManyField(
+        model_name: str,
+        through: t.Optional[str] = None,
+        forward_key: t.Optional[str] = None,
+        backward_key: str = "",
+        related_name: str = "",
+        on_delete: str = CASCADE,
+        db_constraint: bool = True,
+        **kwargs: t.Any,
+    ) -> "ManyToManyRelation":
+        """
+        ManyToMany relation field.
+
+        This field represents a many-to-many between this model and another model.
+
+        See :ref:`many_to_many` for usage information.
+
+        You must provide the following:
+
+        ``model_name``:
+            The name of the related model in a :samp:`'{app}.{model}'` format.
+
+        The following is optional:
+
+        ``through``:
+            The DB table that represents the through table.
+            The default is normally safe.
+        ``forward_key``:
+            The forward lookup key on the through table.
+            The default is normally safe.
+        ``backward_key``:
+            The backward lookup key on the through table.
+            The default is normally safe.
+        ``related_name``:
+            The attribute name on the related model to reverse resolve the many to many.
+        ``db_constraint``:
+            Controls whether or not a constraint should be created in the database for this foreign key.
+            The default is True, and that’s almost certainly what you want; setting this to False can be very bad for data integrity.
+        ``on_delete``:
+            One of:
+                ``field.CASCADE``:
+                    Indicate that the model should be cascade deleted if related model gets deleted.
+                ``field.RESTRICT``:
+                    Indicate that the related model delete will be restricted as long as a
+                    foreign key points to it.
+                ``field.SET_NULL``:
+                    Resets the field to NULL in case the related model gets deleted.
+                    Can only be set if field has ``null=True`` set.
+                ``field.SET_DEFAULT``:
+                    Resets the field to ``default`` value in case the related model gets deleted.
+                    Can only be set is field has a ``default`` set.
+        """
+
+        return ManyToManyField(  # type: ignore
+            model_name,
+            through,
+            forward_key,
+            backward_key,
+            related_name,
+            on_delete=on_delete,
+            db_constraint=db_constraint,
+            **kwargs,
+        )
+
+
 class Tortoiser(OldTortoise):
     """
     base Tortoise class inherited from `tortoise.Tortoise`
@@ -72,7 +381,6 @@ class ConnectTortoise(object):
     
     async def __aenter__(self):
         await Tortoiser.init(**self.initializer)
-
 
     async def __aexit__(self, *wargs, **kwargs):
         await Tortoiser.close_connections()
@@ -182,7 +490,7 @@ class _Tortoise(object):
         self.app.cli.add_command(tortoise)
 
 
-class Tortoise(_Tortoise, ConfigureBase):
+class Tortoise(_Tortoise, ConfigureModelAndFields):
     """
     initialize the Tortoise class.
     :param app: 

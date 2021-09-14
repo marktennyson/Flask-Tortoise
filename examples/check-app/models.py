@@ -1,12 +1,11 @@
-from flask_tortoise import Tortoise, Model, fields
-from flask_tortoise.models import Manager
+from flask_tortoise import Tortoise, Manager
 
-db:"Tortoise" = Tortoise()
+models:"Tortoise" = Tortoise()
 
 
-class Users(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Users(models.Model):
+    id = models.IntField(pk=True)
+    status = models.CharField(20)
     # name = fields.CharField(20, null=True)
 
     def __str__(self):
@@ -15,9 +14,9 @@ class Users(Model):
         manager = Manager()
 
 
-class Workers(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Workers(models.Model):
+    id = models.IntField(pk=True)
+    status = models.CharField(20)
 
     def __str__(self):
         return f"Worker {self.id}: {self.status}"

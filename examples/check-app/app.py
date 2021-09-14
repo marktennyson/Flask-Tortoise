@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from models import *
 from random import choice
-from models import db
 
 
 STATUSES = ["New", "Old", "Gone"]
@@ -10,7 +9,7 @@ app:"Flask" = Flask(__name__)
 app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
 app.config['TORTOISE_DATABASE_MODELS'] = "models"
 
-db.init_app(app)
+models.init_app(app)
 
 @app.get("/")
 async def list_all():
