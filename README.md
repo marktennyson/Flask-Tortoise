@@ -22,7 +22,7 @@ cd Flask-Tortoise && python setup.py install
 ### Simple Examples for better understanding:
 ```python
 from flask import Flask, jsonify
-from flask_tortoise import Tortoise, Model, fields
+from flask_tortoise import Tortoise
 from random import choice
 
 
@@ -34,17 +34,17 @@ app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
 db:"Tortoise" = Tortoise(app)
 
 
-class Users(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Users(db.Model):
+    id = db.IntField(pk=True)
+    status = db.CharField(20)
 
     def __str__(self):
         return f"User {self.id}: {self.status}"
 
 
-class Workers(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Workers(db.Model):
+    id = db.IntField(pk=True)
+    status = db.CharField(20)
 
     def __str__(self):
         return f"Worker {self.id}: {self.status}"
@@ -89,17 +89,17 @@ from flask_tortoise import Tortoise, Model, fields
 db:"Tortoise" = Tortoise()
 
 
-class Users(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Users(db.Model):
+    id = db.IntField(pk=True)
+    status = db.CharField(20)
 
     def __str__(self):
         return f"User {self.id}: {self.status}"
 
 
-class Workers(Model):
-    id = fields.IntField(pk=True)
-    status = fields.CharField(20)
+class Workers(db.Model):
+    id = db.IntField(pk=True)
+    status = db.CharField(20)
 
     def __str__(self):
         return f"Worker {self.id}: {self.status}"
