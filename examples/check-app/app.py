@@ -6,8 +6,8 @@ from random import choice
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODELS'] = "models"
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_MODELS'] = "models"
 
 models.init_app(app)
 

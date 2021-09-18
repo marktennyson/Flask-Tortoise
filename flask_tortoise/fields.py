@@ -1,5 +1,6 @@
 from tortoise.fields.base import (
-    CASCADE,RESTRICT, 
+    CASCADE,
+    RESTRICT, 
     SET_DEFAULT, 
     SET_NULL, 
     Field
@@ -23,6 +24,7 @@ from tortoise.fields.data import (
     UUIDField,
 )
 from tortoise.fields.relational import (
+    ForeignKeyFieldInstance,
     BackwardFKRelation,
     BackwardOneToOneRelation,
     ForeignKeyField,

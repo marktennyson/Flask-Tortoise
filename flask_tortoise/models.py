@@ -17,7 +17,7 @@ if t.TYPE_CHECKING:
 
 
 class Manager(OldManager):
-    def get_queryset(self) -> QuerySet:
+    def get_queryset(self) -> t.Type["QuerySet"]:
         return QuerySet(self._model)
 
     def __str__(self) -> str:

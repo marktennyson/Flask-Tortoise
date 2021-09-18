@@ -1,7 +1,7 @@
 from tortoise import Tortoise as OldTortoise
 
 import asyncio as aio
-import logging
+import logging as logging
 from types import ModuleType
 from tortoise.log import logger
 
@@ -36,12 +36,10 @@ from .fields import (
     BackwardFKRelation,
     BackwardOneToOneRelation,
     ForeignKeyField,
-    ForeignKeyNullableRelation,
     ForeignKeyRelation,
     ManyToManyField,
     ManyToManyRelation,
     OneToOneField,
-    OneToOneNullableRelation,
     OneToOneRelation,
     ReverseRelation,
 )
@@ -65,20 +63,17 @@ __all__:t.Tuple[str] = (
 
 
 class ConfigureModelAndFields(object):
+    """
+    This is the base class to configure the 
+    `Model` and `Fields` with the db instance.
+    """
+
+    CASCADE = CASCADE
+    SET_NULL = SET_NULL
+    SET_DEFAULT = SET_DEFAULT
+    RESTRICT = RESTRICT
 
     class Model(Model):
-        ...
-
-    class CASCADE(CASCADE):
-        ...
-
-    class RESTRICT(RESTRICT):
-        ...
-
-    class SET_DEFAULT(SET_DEFAULT):
-        ...
-
-    class SET_NULL(SET_NULL):
         ...
 
     class Field(Field):
@@ -93,12 +88,13 @@ class ConfigureModelAndFields(object):
     class BooleanField(BooleanField):
         ...
 
+    @staticmethod
     def CharEnumField(
-        enum_type: t.Type[CharEnumType],
+        enum_type: t.Type["CharEnumType"],
         description: t.Optional[str] = None,
         max_length: int = 0,
         **kwargs: t.Any,
-    ) -> CharEnumType:
+    ) -> "CharEnumType":
         """
         Char Enum Field
 
@@ -168,6 +164,7 @@ class ConfigureModelAndFields(object):
     class ReverseRelation(ReverseRelation):
         ...
 
+    @staticmethod
     def IntEnumField(
         enum_type: t.Type["IntEnumType"],
         description: t.Optional[str] = None,
@@ -192,6 +189,8 @@ class ConfigureModelAndFields(object):
         """
         return IntEnumField(enum_type, description, **kwargs)
 
+
+    @staticmethod
     def OneToOneField(
         model_name: str,
         related_name: t.Union[t.Optional[str], t.Literal[False]] = None,
@@ -217,15 +216,15 @@ class ConfigureModelAndFields(object):
             The attribute name on the related model to reverse resolve the foreign key.
         ``on_delete``:
             One of:
-                ``field.CASCADE``:
+                ``models.CASCADE``:
                     Indicate that the model should be cascade deleted if related model gets deleted.
-                ``field.RESTRICT``:
+                ``models.RESTRICT``:
                     Indicate that the related model delete will be restricted as long as a
                     foreign key points to it.
-                ``field.SET_NULL``:
+                ``models.SET_NULL``:
                     Resets the field to NULL in case the related model gets deleted.
                     Can only be set if field has ``null=True`` set.
-                ``field.SET_DEFAULT``:
+                ``models.SET_DEFAULT``:
                     Resets the field to ``default`` value in case the related model gets deleted.
                     Can only be set is field has a ``default`` set.
         ``to_field``:
@@ -241,6 +240,7 @@ class ConfigureModelAndFields(object):
         )
 
 
+    @staticmethod
     def ForeignKeyField(
         model_name: str,
         related_name: t.Union[t.Optional[str], t.Literal[False]] = None,
@@ -266,15 +266,15 @@ class ConfigureModelAndFields(object):
             The attribute name on the related model to reverse resolve the foreign key.
         ``on_delete``:
             One of:
-                ``field.CASCADE``:
+                ``models.CASCADE``:
                     Indicate that the model should be cascade deleted if related model gets deleted.
-                ``field.RESTRICT``:
+                ``models.RESTRICT``:
                     Indicate that the related model delete will be restricted as long as a
                     foreign key points to it.
-                ``field.SET_NULL``:
+                ``models.SET_NULL``:
                     Resets the field to NULL in case the related model gets deleted.
                     Can only be set if field has ``null=True`` set.
-                ``field.SET_DEFAULT``:
+                ``models.SET_DEFAULT``:
                     Resets the field to ``default`` value in case the related model gets deleted.
                     Can only be set is field has a ``default`` set.
         ``to_field``:
@@ -284,12 +284,12 @@ class ConfigureModelAndFields(object):
             Controls whether or not a constraint should be created in the database for this foreign key.
             The default is True, and that’s almost certainly what you want; setting this to False can be very bad for data integrity.
         """
-
         return ForeignKeyField(
-            model_name, related_name, on_delete, db_constraint=db_constraint, **kwargs
-        )
+        model_name, related_name, on_delete, db_constraint=db_constraint, **kwargs
+    )
 
-
+    
+    @staticmethod
     def ManyToManyField(
         model_name: str,
         through: t.Optional[str] = None,
@@ -330,15 +330,15 @@ class ConfigureModelAndFields(object):
             The default is True, and that’s almost certainly what you want; setting this to False can be very bad for data integrity.
         ``on_delete``:
             One of:
-                ``field.CASCADE``:
+                ``models.CASCADE``:
                     Indicate that the model should be cascade deleted if related model gets deleted.
-                ``field.RESTRICT``:
+                ``models.RESTRICT``:
                     Indicate that the related model delete will be restricted as long as a
                     foreign key points to it.
-                ``field.SET_NULL``:
+                ``models.SET_NULL``:
                     Resets the field to NULL in case the related model gets deleted.
                     Can only be set if field has ``null=True`` set.
-                ``field.SET_DEFAULT``:
+                ``models.SET_DEFAULT``:
                     Resets the field to ``default`` value in case the related model gets deleted.
                     Can only be set is field has a ``default`` set.
         """
@@ -358,11 +358,15 @@ class ConfigureModelAndFields(object):
 class Tortoiser(OldTortoise):
     """
     base Tortoise class inherited from `tortoise.Tortoise`
+    Please inherit this class and override the default 
+    methods to perform the changes related 
+    to the base `Tortoise` class.
     """
 
 class ConnectTortoise(object):
     """
-    intialize the tortoise orm as context of the instance
+    intialize the tortoise orm as 
+    context(`with` statement) of the instance
     of flask_tortoise.Tortoise class.
 
     :param initializer:
@@ -438,15 +442,19 @@ class _Tortoise(object):
     def __check_data_type(
         self, 
         pv_data:t.Any, 
-        realtype:t.Union[t.Tuple[t.Type], t.Type], 
-        var_name:str
+        realtype:t.Union[t.Tuple[type], type], 
+        var_name:str,
+        required:bool=False
         ) -> None:
 
         if pv_data is None:
-            return None
+            if required is True:
+                raise ValueError(f"`{var_name}` config var can't be None. Please set a {realtype.__name__} type value for it.")
+            else:
+                return None
 
         if not isinstance(pv_data, realtype):
-            raise TypeError(f"`{var_name}` config var takes only {realtype.__name__} type data. Got: {type(pv_data).__name__}")
+            raise TypeError(f"`{var_name}` config var takes only {realtype.__name__ if isinstance(realtype, type) else [rt.__name__ for rt in realtype]} type data. Got: {type(pv_data).__name__}")
 
         return None
 
@@ -513,19 +521,19 @@ class Tortoise(_Tortoise, ConfigureModelAndFields):
         :param app: 
             the Flask application
         """
-        db_uri:str = app.config["TORTOISE_DATABASE_URI"]
-        db_models:t.Union[str, list, tuple] = app.config.get("TORTOISE_DATABASE_MODELS", app.import_name)
-        db_modules:t.Dict[str, t.Iterable[t.Union[str, ModuleType]]] = app.config.get("TORTOISE_DATABASE_MODULES", dict())
-        db_config:t.Optional[dict] = app.config.get("TORTOISE_DATABASE_CONFIG", None)
-        db_config_file:t.Optional[str] = app.config.get("TORTOISE_DATABASE_CONFIG_FILE", None)
-        generate_schemas:bool = app.config.get("TORTOISE_GENERATE_SCHEMAS", False)
+        db_uri:str = app.config.get("TORTOISE_ORM_DATABASE_URI", None)
+        db_models:t.Union[str, list, tuple] = app.config.get("TORTOISE_ORM_MODELS", app.import_name)
+        db_modules:t.Dict[str, t.Iterable[t.Union[str, ModuleType]]] = app.config.get("TORTOISE_ORM_MODULES", dict())
+        db_config:t.Optional[dict] = app.config.get("TORTOISE_ORM_CONFIG", None)
+        db_config_file:t.Optional[str] = app.config.get("TORTOISE_ORM_CONFIG_FILE", None)
+        generate_schemas:bool = app.config.get("TORTOISE_ORM_GENERATE_SCHEMAS", False)
 
-        _ = self.__check_data_type(db_uri, str, "TORTOISE_DATABASE_URI")
-        _ = self.__check_data_type(db_models, (str, list, tuple), "TORTOISE_DATABASE_MODELS")
-        _ = self.__check_data_type(db_modules, dict, "TORTOISE_DATABASE_MODULES")
-        _ = self.__check_data_type(db_config, dict, "TORTOISE_DATABASE_CONFIG")
-        _ = self.__check_data_type(db_config_file, str, "TORTOISE_DATABASE_CONFIG_FILE")
-        _ = self.__check_data_type(generate_schemas, bool, "TORTOISE_GENERATE_SCHEMAS")
+        _ = self.__check_data_type(db_uri, str, "TORTOISE_ORM_DATABASE_URI", True)
+        _ = self.__check_data_type(db_models, (str, list, tuple), "TORTOISE_ORM_MODELS")
+        _ = self.__check_data_type(db_modules, dict, "TORTOISE_ORM_MODULES")
+        _ = self.__check_data_type(db_config, dict, "TORTOISE_ORM_CONFIG")
+        _ = self.__check_data_type(db_config_file, str, "TORTOISE_ORM_CONFIG_FILE")
+        _ = self.__check_data_type(generate_schemas, bool, "TORTOISE_ORM_GENERATE_SCHEMAS")
 
         if db_models is not None:
             if isinstance(db_models, str):

@@ -4,7 +4,7 @@ from flask_tortoise import Tortoise, fields
 
 def create_app():
     app = Flask(__name__)
-    app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
+    app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
     return app
     
 app = create_app()

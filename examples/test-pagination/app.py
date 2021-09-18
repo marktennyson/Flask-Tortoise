@@ -4,8 +4,8 @@ import click as c
 
 app = Flask(__name__)
 
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODELS'] = "models"
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_MODELS'] = "models"
 
 db.init_app(app)
 

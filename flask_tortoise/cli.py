@@ -42,6 +42,11 @@ def complete_async_func(f):
         # Close db connections at the end of all all but the cli group function
         try:
             loop.run_until_complete(f(*args, **kwargs))
+        
+        except Exception as e:
+            loop.run_until_complete(Tortoise.close_connections())
+            raise e.__class__(e)
+
         finally:
             if f.__name__ != "tortoise":
                 loop.run_until_complete(Tortoise.close_connections())

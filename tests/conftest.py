@@ -10,8 +10,8 @@ from flask_tortoise import Tortoise, fields
 def app(request):
     app = flask.Flask(request.module.__name__)
     app.testing = True
-    app.config["TORTOISE_DATABASE_URI"] = "sqlite://:memory:"
-    app.config["TORTOISE_DATABASE_MODELS"] = "__main__"
+    app.config["TORTOISE_ORM_DATABASE_URI"] = "sqlite://:memory:"
+    app.config["TORTOISE_ORM_MODELS"] = "__main__"
     return app
 
 

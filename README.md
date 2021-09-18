@@ -29,7 +29,7 @@ from random import choice
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
 
 db:"Tortoise" = Tortoise(app)
 
@@ -115,8 +115,8 @@ from random import choice
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODELS'] = "models" # if you have more than one models file then : ["models_1", "models_2", "models_3"]
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_MODELS'] = "models" # if you have more than one models file then : ["models_1", "models_2", "models_3"]
 
 db.init_app(app)
 

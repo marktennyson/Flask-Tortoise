@@ -26,7 +26,7 @@ The main aim of __Tortoise-ORM__ is to provide the same service and api like the
 
 <img src="https://tortoise-orm.readthedocs.io/en/latest/_images/ORM_Perf.png"></img>
 
-## Installing
+## Installation
 
 #### Install or update from `PYPI`
 ```bash
@@ -51,6 +51,38 @@ $ cd Flask-Tortoise && python setup.py install
 `please check the official documentation of Tortoise-ORM for more details at: ` [https://tortoise-orm.readthedocs.io/en/latest/](https://tortoise-orm.readthedocs.io/en/latest/)
 
 
+## Available configs
+
+* __TORTOISE_ORM_DATABASE_URI:__           
+ad the database url here.           
+**Mandatory field**             
+**Type:** `str`           
+
+* __TORTOISE_ORM_MODELS:__            
+add the name of the all model file.         
+**Default value:** `app.import_name`        
+**Type:** `str`        
+
+* __TORTOISE_ORM_MODULES:__          
+add the tortoise orm module dict here if you are about to initialize it by modules.        
+**Default value:** `{}`           
+**Type:** `dict`           
+
+* __TORTOISE_ORM_CONFIG:__     
+Initialize the tortoise Orm with the config dictionary.    
+**Default value:** `{}`      
+**Type:** `dict`      
+
+* __TORTOISE_ORM_CONFIG_FILE:__
+Initialize the tortoise orm from a config file.    
+**Default value:** `None`   
+**Type:** `optional-str`   
+
+* __TORTOISE_ORM_GENERATE_SCHEMAS:__     
+generate the schemas at the time of tortoise orm initialization.      
+**Default value:** `False`         
+**Type:** `bool` 
+
 ## A Basic demo for better understanding
 ```python
 from flask import Flask, jsonify
@@ -61,7 +93,7 @@ from random import choice
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
 
 db:"Tortoise" = Tortoise(app)
 
@@ -147,8 +179,8 @@ from random import choice
 STATUSES = ["New", "Old", "Gone"]
 
 app:"Flask" = Flask(__name__)
-app.config['TORTOISE_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config['TORTOISE_DATABASE_MODELS'] = "models" # if you have more than one models file then : ["models_1", "models_2", "models_3"]
+app.config['TORTOISE_ORM_DATABASE_URI'] = 'sqlite://db.sqlite3'
+app.config['TORTOISE_ORM_MODELS'] = "models" # if you have more than one models file then : ["models_1", "models_2", "models_3"]
 
 db.init_app(app)
 
@@ -180,36 +212,4 @@ async def get_worker():
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
-```
-
-## Available configs
-
-__TORTOISE_DATABASE_URI:__           
-ad the database url here.           
-**Mandatory field**             
-**Type:** `str`           
-
-__TORTOISE_DATABASE_MODELS:__            
-add the name of the all model file.         
-**Default value:** `app.import_name`        
-**Type:** `str`        
-
-__TORTOISE_DATABASE_MODULES:__          
-add the tortoise orm module dict here if you are about to initialize it by modules.        
-**Default value:** `{}`           
-**Type:** `dict`           
-
-__TORTOISE_DATABASE_CONFIG:__     
-Initialize the tortoise Orm with the config dictionary.    
-**Default value:** `{}`      
-**Type:** `dict`      
-
-__TORTOISE_DATABASE_CONFIG_FILE:__
-Initialize the tortoise orm from a config file.    
-**Default value:** `None`   
-**Type:** `optional-str`   
-
-__TORTOISE_GENERATE_SCHEMAS:__     
-generate the schemas at the time of tortoise orm initialization.      
-**Default value:** `False`         
-**Type:** `bool`     
+```    
