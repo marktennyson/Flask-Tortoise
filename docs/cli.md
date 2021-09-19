@@ -1,4 +1,4 @@
-# Command Line Interface
+# Command Line Interface to Migrate the Database
 
 ## :smile: Introduction
 

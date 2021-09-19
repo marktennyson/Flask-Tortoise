@@ -18,7 +18,7 @@ _______________________________________________________________________
 
 ## Introduction
 
-Flask-Tortoise is an extension for Flask that adds support for asynchronous Tortoise-ORM to your application. It aims to simplify using Tortoise-ORM with Flask by providing useful defaults and extra helpers that make it easier to accomplish common tasks.
+Flask-Tortoise is an extension for Flask that adds support for asynchronous Tortoise-ORM to your application with in-built **migration** system. It aims to simplify using Tortoise-ORM with Flask by providing useful defaults and extra helpers that make it easier to accomplish common tasks.
 
 Tortoise-ORM is one of the best tool to interact with the database asynchronously. It's clean and Django type implementation provides you a better view and understanding of the database ORM system. Also you can use the Pydantic data module to write the error-less code.
 
