@@ -82,7 +82,7 @@ if __name__ == '__main__':
 #### If you save your models into a separate file than you have mention the file name on app config:
 
 let's assume you have stores all of your models at `models.py` file.
-##### models.py
+##### models.py file
 ```python
 from flask_tortoise import Tortoise, Model, fields
 

@@ -1,4 +1,4 @@
-from flask_tortoise import Tortoise, Manager, fields
+from flask_tortoise import Tortoise, Manager
 
 models:"Tortoise" = Tortoise()
 
@@ -26,3 +26,6 @@ class CoWorker(models.Model):
     name = models.CharField(max_length=255)
     rltn = models.ForeignKeyField(f"models.Users", on_delete=models.CASCADE)
     created_at = models.DatetimeField(auto_now_add=True)
+
+    class Meta:
+        manager = Manager()

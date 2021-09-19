@@ -36,11 +36,23 @@ async def get_worker():
     worker:"Workers" = await Workers.get(id=1)
     return str(worker.status)
 
-@app.get("/aniket")
-async def aniket():
-    pk=17
-    user =await Users.get_or_404(pk=pk, description=f"user object not found at ID: {pk}")
-    return jsonify(name=str(user))
+@app.get("/co-workers")
+async def co_workers():
+    user = await Users.get(id=1)
+    co_worker:"CoWorker" = await CoWorker.create(name="Aniket Sarkar", rltn=user)
+    return str(co_worker)
+
+@app.get("/get-coworker/<int:id>")
+async def aniket(id):
+    pk=id
+    co_worker =await CoWorker.get_or_404(pk=pk, description=f"user object not found at ID: {pk}")
+    return jsonify(name=str(co_worker.name))
+
+@app.get("/delete-coworker/<int:id>")
+async def delete_coworker(id):
+    c = await CoWorker.get_or_404(id=id)
+    await c.delete()
+    return "object deleted"
 
 @app.get("/sarkar")
 async def sarkar():
