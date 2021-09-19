@@ -37,32 +37,44 @@ class Model(OldModel):
     _meta = MetaInfo(None)  # required for type checking      
 
     @classmethod
-    def get_or_404(cls: t.Type["MODEL"], *args: Q, **kwargs: t.Any) -> "QuerySetSingle[MODEL]":
+    def get_or_404(
+        cls: t.Type["MODEL"], 
+        *args: Q, 
+        description: t.Optional[str]=None,
+        **kwargs: t.Any
+        ) -> "QuerySetSingle[MODEL]":
         """
         Fetches a single record for a Model type using the provided filter parameters or 404 error.
 
-        .. code-block:: python3
+        for example::
 
-            user = await User.get_or_404(username="foo")
+            user:"User" = await User.get_or_404(username="foo", description="username not found.")
 
         :param args: Q functions containing constraints. Will be AND'ed.
+        :param description: Error description for the `werkzeug's NotFound` error.
         :param kwargs: Simple filter constraints.
         """
-        return cls._meta.manager.get_queryset().get_or_404(*args, **kwargs)
+        return cls._meta.manager.get_queryset().get_or_404(*args, description, **kwargs)
 
     @classmethod
-    def first_or_404(cls: t.Type["MODEL"], *args: Q, **kwargs: t.Any) -> "QuerySetSingle[MODEL]":
+    def first_or_404(
+        cls: t.Type["MODEL"], 
+        *args: Q, 
+        description: t.Optional[str]=None,
+        **kwargs: t.Any
+        ) -> "QuerySetSingle[MODEL]":
         """
         Fetches the first record in the QuerySet or 404 error.
 
-        .. code-block:: python3
+        for example::
 
-            user = await User.first_or_404(username="foo")
+            user:"User" = await User.first_or_404(username="foo", description="username not found.")
 
         :param args: Q functions containing constraints. Will be AND'ed.
+        :param description: Error description for the `werkzeug's NotFound` error.
         :param kwargs: Simple filter constraints.
         """
-        return cls._meta.manager.get_queryset().first_or_404(*args, **kwargs)
+        return cls._meta.manager.get_queryset().first_or_404(*args, description, **kwargs)
 
     @classmethod
     def paginate(

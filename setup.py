@@ -13,11 +13,11 @@ with open(os.path.join(baseDir, "README.md"), "r") as f:
 setup(
     name="Flask-Tortoise",
     version=".".join([str(v) for v in list(VERSION_INFO)]),
-    url="https://github.com/marktennyson/flask-tortoise",
+    url="https://github.com/marktennyson/Flask-Tortoise",
     license="GNU General Public License v3 or later (GPLv3+)",
     author=AUTHOR,
     author_email="aniketsarkar@yahoo.com",
-    description="Adds Tortoise ORM support for flask app.",
+    description="Adds asynchronous Tortoise ORM support for flask app.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords=["flask", "flask-tortoise", "Tortoise"],

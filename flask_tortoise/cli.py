@@ -33,8 +33,53 @@ CONFIG_DEFAULT_VALUES = {
     "src_folder": ".",
 }
 
+class CLIGroup(c.Group):
+    """
+    inherited `click.Group` class to close the 
+    tortoise orm connection after showing the help message.
+    """
+    async def __torm_connection_closer(self):
+        return await Tortoise.close_connections()
+
+    def format_help(self, ctx, formatter):
+        try:
+            super(CLIGroup, self).format_help(ctx, formatter)
+
+        finally:
+            try:
+                loop = aio.get_running_loop()
+            except RuntimeError:
+                loop = aio.get_event_loop()
+
+            loop.run_until_complete(self.__torm_connection_closer())
+
+
+class CommandGroup(c.Command):
+    """
+    inherited `click.Command` class to close the 
+    tortoise orm connection after showing the help message.
+    """
+    async def __torm_connection_closer(self):
+        return await Tortoise.close_connections()
+
+    def format_help(self, ctx, formatter):
+        try:
+            super(CommandGroup, self).format_help(ctx, formatter)
+
+        finally:
+            try:
+                loop = aio.get_running_loop()
+            except RuntimeError:
+                loop = aio.get_event_loop()
+
+            loop.run_until_complete(self.__torm_connection_closer())
+
 
 def complete_async_func(f):
+    """
+    complete the async function and close 
+    the tortoise orm connection at the end.
+    """
     @wraps(f)
     def wrapper(*args, **kwargs):
         loop = aio.get_event_loop()
@@ -44,6 +89,10 @@ def complete_async_func(f):
             loop.run_until_complete(f(*args, **kwargs))
         
         except Exception as e:
+            
+            # if any error occurs during the execution, 
+            # this block will close the tortoise orm connection immediately.
+            
             loop.run_until_complete(Tortoise.close_connections())
             raise e.__class__(e)
 
@@ -54,7 +103,7 @@ def complete_async_func(f):
     return wrapper
 
 
-@c.group(context_settings={"help_option_names": ["-h", "--help"]})
+@c.group(context_settings={"help_option_names": ["-h", "--help"]}, cls=CLIGroup)
 @c.pass_context
 @with_appcontext
 @complete_async_func
@@ -134,7 +183,7 @@ async def db_init(ctx: c.Context, location, src_folder):
     Console.log.Success(f"Successfully generated the config file: {config_file}")
 
 
-@tortoise.command('migrate', help="Generate migrate changes file.")
+@tortoise.command('migrate', help="Generate migrate changes file.", cls=CommandGroup)
 @c.option("--name", default="update", show_default=True, help="Migrate name.")
 @c.pass_context
 @complete_async_func
@@ -146,7 +195,7 @@ async def db_migrate(ctx: c.Context, name):
     Console.log.Success(f"Success migrate {ret}")
 
 
-@tortoise.command('upgrade', help="Upgrade to specified version.")
+@tortoise.command('upgrade', help="Upgrade to specified version.", cls=CommandGroup)
 @c.pass_context
 @with_appcontext
 @complete_async_func
@@ -159,10 +208,9 @@ async def db_upgrade(ctx: c.Context):
     else:
         for version_file in migrated:
             Console.log.Success(f"Success upgrade {version_file}")
-        from tortoise import Tortoise
 
 
-@tortoise.command('downgrade', help="Downgrade to specified version.")
+@tortoise.command('downgrade', help="Downgrade to specified version.", cls=CommandGroup)
 @c.option(
     "-v",
     "--version",
@@ -193,10 +241,10 @@ async def db_downgrade(ctx: c.Context, version: int, delete: bool):
         for file in files:
             Console.log.Success(f"Success downgrade {file}")
     else:
-        Console.log.Error("Aborted!")
+        return Console.log.Error("Aborted!")
 
 
-@tortoise.command("heads", help="Show current available heads in migrate location.")
+@tortoise.command("heads", help="Show current available heads in migrate location.", cls=CommandGroup)
 @c.pass_context
 @complete_async_func
 async def db_heads(ctx: c.Context):
@@ -208,7 +256,7 @@ async def db_heads(ctx: c.Context):
         Console.log.Success(version)
 
 
-@tortoise.command("history", help="List all migrate items.")
+@tortoise.command("history", help="List all migrate items.", cls=CommandGroup)
 @c.pass_context
 @complete_async_func
 async def db_history(ctx: c.Context):
@@ -220,7 +268,7 @@ async def db_history(ctx: c.Context):
         Console.log.Info(version)
 
 
-@tortoise.command("init-db", help="Generate schema and generate app migrate location.")
+@tortoise.command("init-db", help="Generate schema and generate app migrate location.", cls=CommandGroup)
 @c.option(
     "--safe",
     type=bool,
@@ -242,7 +290,7 @@ async def init_db(ctx: c.Context, safe):
         return Console.log.Error(f"Inited {app} already, or delete {dirname} and try again.")
 
 
-@tortoise.command("inspectdb", help="Introspects the database tables to standard output as TortoiseORM model.")
+@tortoise.command("inspectdb", help="Introspects the database tables to standard output as TortoiseORM model.", cls=CommandGroup)
 @c.option(
     "-t",
     "--table",

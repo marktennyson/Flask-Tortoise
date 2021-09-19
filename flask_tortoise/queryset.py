@@ -190,12 +190,17 @@ class QuerySet(OldQuerySet):
                 raise MultipleObjectsReturned("Multiple objects returned, expected exactly one")
         return instance_list
 
-    def get_or_404(self, *args: "Q", **kwargs: t.Any) -> QuerySetSingle["MODEL"]:
+    def get_or_404(
+        self, 
+        *args: "Q", 
+        description:t.Optional[str]=None, 
+        **kwargs: t.Any
+        ) -> QuerySetSingle["MODEL"]:
         """
         Fetch exactly one object matching 
         the parameters or raise 404 not found.
         """
-        err_description = kwargs.pop("description", None)
+        err_description = description
         queryset:"QuerySet" = self.filter(*args, **kwargs)
         queryset._limit = 2
         queryset._single = True
@@ -203,16 +208,26 @@ class QuerySet(OldQuerySet):
         queryset._not_found_err_description = err_description
         return queryset
 
-    def first_or_404(self, *args: "Q", **kwargs:t.Any):
+    def first_or_404(
+        self, 
+        *args: "Q", 
+        description:t.Optional[str]=None, 
+        **kwargs:t.Any
+        ) -> QuerySetSingle["MODEL"]:
         """
         Like :meth:`first` but aborts with 404 if not found instead
         of returning ``None``.
         """
-        return self.get_or_404(*args, **kwargs)
+        return self.get_or_404(*args, description, **kwargs)
 
     def paginate(
-        self, page=None, per_page=None, error_out=True, max_per_page=None, count=True
-    ) -> "Pagination":
+        self, 
+        page:t.Optional[int]=None, 
+        per_page:t.Optional[int]=None, 
+        error_out:bool=True, 
+        max_per_page:t.Optional[int]=None, 
+        count:bool=True
+    ) -> t.Type["Pagination"]:
         """Returns ``per_page`` items from page ``page``.
         If ``page`` or ``per_page`` are ``None``, they will be retrieved from
         the request query. If ``max_per_page`` is specified, ``per_page`` will

@@ -62,3 +62,7 @@ async def get_data_one():
     user =await Users.first_or_404(pk=pk, description=f"user object not found at ID: {pk}")
     return jsonify(name=str(user))
 ```
+
+#### pagination
+The __pagination__ support just like the **flask-sqlalchemy**.
+*This features is still under development. Jinja2 requires teh support of async functions to do this.*

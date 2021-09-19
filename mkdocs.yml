@@ -27,7 +27,7 @@ theme:
   icon:
     repo: fontawesome/brands/github-alt
 
-repo_name: Flask-Tortoise
+repo_name: marktennyson/Flask-Tortoise
 repo_url: https://github.com/marktennyson/Flask-Tortoise
 
 plugins:

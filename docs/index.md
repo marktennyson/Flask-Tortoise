@@ -36,7 +36,7 @@ pip install -U Flask-Tortoise
 #### Install from source code
 ```bash
 $ git clone https://github.com/marktennyson/Flask-Tortoise
-$ cd Flask-Tortoise && python setup.py install
+$ cd Flask-Tortoise && pip install .
 ```
 
 ## Features
