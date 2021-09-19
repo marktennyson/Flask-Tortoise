@@ -1,0 +1,688 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Adds asynchronous Tortoise ORM support for flask app.">
+      
+      
+      
+      
+        <link rel="canonical" href="https://marktennyson.github.io/Flask-Tortoise/cli/">
+      
+      <link rel="icon" href="https://camo.githubusercontent.com/ac5549cf1ea281ad3422b09f0de31cffa09d95f817ff8f95d15865cf15ab8a48/68747470733a2f2f746f72746f6973652d6f726d2e72656164746865646f63732e696f2f656e2f6c61746573742f5f7374617469632f746f72746f6973652e706e67">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Command Line - Flask-Tortoise</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#command-line-interface-to-migrate-the-database" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Flask-Tortoise" class="md-header__button md-logo" aria-label="Flask-Tortoise" data-md-component="logo">
+      
+  <img src="https://camo.githubusercontent.com/ac5549cf1ea281ad3422b09f0de31cffa09d95f817ff8f95d15865cf15ab8a48/68747470733a2f2f746f72746f6973652d6f726d2e72656164746865646f63732e696f2f656e2f6c61746573742f5f7374617469632f746f72746f6973652e706e67" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Flask-Tortoise
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Command Line
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/marktennyson/Flask-Tortoise/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    marktennyson/Flask-Tortoise
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Flask-Tortoise" class="md-nav__button md-logo" aria-label="Flask-Tortoise" data-md-component="logo">
+      
+  <img src="https://camo.githubusercontent.com/ac5549cf1ea281ad3422b09f0de31cffa09d95f817ff8f95d15865cf15ab8a48/68747470733a2f2f746f72746f6973652d6f726d2e72656164746865646f63732e696f2f656e2f6c61746573742f5f7374617469632f746f72746f6973652e706e67" alt="logo">
+
+    </a>
+    Flask-Tortoise
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/marktennyson/Flask-Tortoise/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    marktennyson/Flask-Tortoise
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Flask-Tortoise
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../queryset/" class="md-nav__link">
+        QuerySet
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/" class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Command Line
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Command Line
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    Quick Start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-db" class="md-nav__link">
+    Init DB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-models-and-make-migrate" class="md-nav__link">
+    Update models and make migrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-to-latest-version" class="md-nav__link">
+    Upgrade to latest version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downgrade-to-specified-version" class="md-nav__link">
+    Downgrade to specified version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-history" class="md-nav__link">
+    Show history
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-heads-to-be-migrated" class="md-nav__link">
+    Show heads to be migrated
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    Quick Start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-db" class="md-nav__link">
+    Init DB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-models-and-make-migrate" class="md-nav__link">
+    Update models and make migrate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-to-latest-version" class="md-nav__link">
+    Upgrade to latest version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downgrade-to-specified-version" class="md-nav__link">
+    Downgrade to specified version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-history" class="md-nav__link">
+    Show history
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#show-heads-to-be-migrated" class="md-nav__link">
+    Show heads to be migrated
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/marktennyson/Flask-Tortoise/edit/master/docs/cli.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="command-line-interface-to-migrate-the-database">Command Line Interface to Migrate the Database<a class="headerlink" href="#command-line-interface-to-migrate-the-database" title="Permanent link">&para;</a></h1>
+<h2 id="introduction"><img alt="😄" class="emojione" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" /> Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>This document describes how to use the command line to make migrations while using <strong>Flask-Tortoise</strong>.
+Internally it's using <strong>Aerich</strong> module to provide the migration support. Special thanks to the author of <strong>Aerich</strong> module.</p>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p><strong>Flask-Tortoise</strong> module is connected to the <code>flask.Flask.cli</code> click-group. So you can use the command line as same as the other flask extensions. </p>
+<div class="highlight"><pre><span></span><code>$ flask tortoise --help
+
+
+Usage: flask tortoise <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+
+  the default <span class="nb">command</span> line interface to manage the version of the tortoise
+  orm.
+
+Options:
+  -h, --help  Show this message and exit.
+
+Commands:
+  downgrade  Downgrade to specified version.
+  heads      Show current available heads <span class="k">in</span> migrate location.
+  <span class="nb">history</span>    List all migrate items.
+  init       Initialize the orm.
+  init-db    Generate schema and generate app migrate location.
+  inspectdb  Introspects the database tables to standard output as...
+  migrate    Generate migrate changes file.
+  upgrade    Upgrade to specified version.
+</code></pre></div>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h4 id="initialization">Initialization<a class="headerlink" href="#initialization" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>$ flask tortoise init --help
+
+
+Usage: flask tortoise init <span class="o">[</span>OPTIONS<span class="o">]</span>
+
+  Init config file and generate root migrate location.
+
+Options:
+  -t, --tortoise-orm TEXT  Tortoise-ORM config module dict variable, like settings.TORTOISE_ORM.
+                           <span class="o">[</span>required<span class="o">]</span>
+  --location TEXT          Migrate store location.  <span class="o">[</span>default: ./migrations<span class="o">]</span>
+  -h, --help               Show this message and exit.
+</code></pre></div>
+<h4 id="init-db">Init DB<a class="headerlink" href="#init-db" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code>$ flask tortoise init-db
+
+
+Success create app migrate location ./migrations/models
+Success generate schema <span class="k">for</span> app <span class="s2">&quot;models&quot;</span>
+</code></pre></div>
+<img alt="💡" class="emojione" src="https://twemoji.maxcdn.com/v/latest/svg/1f4a1.svg" title=":bulb:" /> <strong>Note:</strong> If your models not present at the <code>__main__</code> file then you must need to pass the models file name at the app config: <code>TORTOISE_DATABASE_MODLES</code>.</p>
+<h4 id="update-models-and-make-migrate">Update models and make migrate<a class="headerlink" href="#update-models-and-make-migrate" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code>$ flask tortoise migrate --name drop_column
+
+
+Success migrate 1_202029051520102929_drop_column.sql
+</code></pre></div>
+Format of migrate filename is {version_num}<em name_update="name|update">{datetime}</em>.sql.</p>
+<p>And if it guess you are renaming a column, it will ask Rename {old_column} to {new_column} [True], you can choice True to rename column without column drop, or choice False to drop column then create.</p>
+<p>If you use MySQL, only MySQL8.0+ support rename..to syntax.</p>
+<h4 id="upgrade-to-latest-version">Upgrade to latest version<a class="headerlink" href="#upgrade-to-latest-version" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code>$ flask tortoise upgrade
+
+
+Success upgrade 1_202029051520102929_drop_column.sql
+</code></pre></div>
+Now your db is migrated to latest.</p>
+<h4 id="downgrade-to-specified-version">Downgrade to specified version<a class="headerlink" href="#downgrade-to-specified-version" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code>$ flask tortoise downgrade --help
+
+
+Usage: flask tortoise downgrade <span class="o">[</span>OPTIONS<span class="o">]</span>
+
+  Downgrade to specified version.
+
+Options:
+  -v, --version INTEGER  Specified version, default to last.  <span class="o">[</span>default: -1<span class="o">]</span>
+  -d, --delete           Delete version files at the same time.  <span class="o">[</span>default:
+                         False<span class="o">]</span>
+  -h, --help             Show this message and exit.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ flask tortoise downgrade
+
+
+Success downgrade 1_202029051520102929_drop_column.sql
+</code></pre></div>
+Now your db rollback to specified version.</p>
+<h4 id="show-history">Show history<a class="headerlink" href="#show-history" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>$ flask tortoise <span class="nb">history</span>
+
+
+1_202029051520102929_drop_column.sql
+</code></pre></div>
+<h4 id="show-heads-to-be-migrated">Show heads to be migrated<a class="headerlink" href="#show-heads-to-be-migrated" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>$ aerich heads
+
+
+1_202029051520102929_drop_column.sql
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tutorial" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Tutorial
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "content.tabs.link"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
