@@ -19,6 +19,10 @@ git clone https://github.com/marktennyson/Flask-Tortoise
 cd Flask-Tortoise && pip install .
 ```
 
+### Important links
+__Github Link:__ [https://github.com/marktennyson/Flask-Tortoise](https://github.com/marktennyson/Flask-Tortoise)    
+__Official Documentation:__ [https://marktennyson.github.io/Flask-Tortoise](https://marktennyson.github.io/Flask-Tortoise/)
+
 ### Simple Examples for better understanding:
 ```python
 from flask import Flask, jsonify
