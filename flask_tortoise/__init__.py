@@ -72,6 +72,8 @@ class ConfigureModelAndFields(object):
     SET_NULL = SET_NULL
     SET_DEFAULT = SET_DEFAULT
     RESTRICT = RESTRICT
+    OneToOneRelation = OneToOneRelation
+    ForeignKeyRelation = ForeignKeyRelation
 
     class Model(Model):
         ...
