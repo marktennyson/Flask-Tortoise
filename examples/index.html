@@ -68,6 +68,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#simple-examples" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -262,10 +267,105 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Examples
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic" class="md-nav__link">
+    Basic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    Comments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefetching" class="md-nav__link">
+    Prefetching
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    Transactions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-by" class="md-nav__link">
+    Group By
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations-with-unique-field" class="md-nav__link">
+    Relations with Unique field
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursive-relations" class="md-nav__link">
+    Recursive relations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -308,6 +408,101 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic" class="md-nav__link">
+    Basic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    Comments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefetching" class="md-nav__link">
+    Prefetching
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    Transactions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-by" class="md-nav__link">
+    Group By
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations" class="md-nav__link">
+    Relations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relations-with-unique-field" class="md-nav__link">
+    Relations with Unique field
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursive-relations" class="md-nav__link">
+    Recursive relations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -318,9 +513,763 @@
                   </a>
                 
                 
-                  <h1>Examples</h1>
-                
-                
+                <h1 id="simple-examples">Simple Examples<a class="headerlink" href="#simple-examples" title="Permanent link">&para;</a></h1>
+<h2 id="basic">Basic<a class="headerlink" href="#basic" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example demonstrates most basic operations with single model</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_tortoise</span> <span class="kn">import</span> <span class="n">Tortoise</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Tortoise</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">datetime</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;event&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/event&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">event</span><span class="p">():</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+    <span class="c1"># &gt;&gt;&gt; Updated name</span>
+
+    <span class="k">await</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test 2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="c1"># &gt;&gt;&gt; [1, 2]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;id&#39;: 1, &#39;name&#39;: &#39;Updated name&#39;}, {&#39;id&#39;: 2, &#39;name&#39;: &#39;Test 2&#39;}]</span>
+    <span class="k">return</span> <span class="s2">&quot;null&quot;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="comments">Comments<a class="headerlink" href="#comments" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example demonstrates most basic operations with single model</span>
+<span class="sd">and a Table definition generation with comment support</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name of the event that corresponds to an action&quot;</span><span class="p">)</span>
+    <span class="n">datetime</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">DatetimeField</span><span class="p">(</span>
+        <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Datetime of when the event was generated&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;event&quot;</span>
+        <span class="n">table_description</span> <span class="o">=</span> <span class="s2">&quot;This table contains a list of all the example events&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">events</span><span class="p">():</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+
+    <span class="k">await</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test 2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="prefetching">Prefetching<a class="headerlink" href="#prefetching" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tortoise.query_utils</span> <span class="kn">import</span> <span class="n">Prefetch</span>
+
+
+<span class="k">class</span> <span class="nc">Tournament</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Event&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">tournament</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyRelation</span><span class="p">[</span><span class="n">Tournament</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;db.Tournament&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span>
+    <span class="p">)</span>
+    <span class="n">participants</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Team&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="s2">&quot;db.Team&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s2">&quot;event_team&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Team</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">events</span><span class="p">():</span>
+    <span class="n">tournament</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;tournament&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;First&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Second&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">)</span>
+    <span class="n">tournament_with_filtered</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="n">Prefetch</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;First&quot;</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tournament_with_filtered</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span>
+
+    <span class="n">tournament_with_filtered_to_attr</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span>
+            <span class="n">Prefetch</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;First&quot;</span><span class="p">),</span> <span class="n">to_attr</span><span class="o">=</span><span class="s2">&quot;to_attr_events_first&quot;</span><span class="p">),</span>
+            <span class="n">Prefetch</span><span class="p">(</span>
+                <span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Second&quot;</span><span class="p">),</span> <span class="n">to_attr</span><span class="o">=</span><span class="s2">&quot;to_attr_events_second&quot;</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tournament_with_filtered_to_attr</span><span class="o">.</span><span class="n">to_attr_events_first</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tournament_with_filtered_to_attr</span><span class="o">.</span><span class="n">to_attr_events_second</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="transactions">Transactions<a class="headerlink" href="#transactions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example demonstrates how you can use transactions with tortoise</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">tortoise.exceptions</span> <span class="kn">import</span> <span class="n">OperationalError</span>
+<span class="kn">from</span> <span class="nn">tortoise.transactions</span> <span class="kn">import</span> <span class="n">atomic</span><span class="p">,</span> <span class="n">in_transaction</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;event&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/run&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">in_transaction</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+            <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">using_db</span><span class="o">=</span><span class="n">connection</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">using_db</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span>
+            <span class="n">saved_event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">using_db</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM non_existent_table&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">OperationalError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="n">saved_event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">saved_event</span><span class="p">)</span>
+
+    <span class="nd">@atomic</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">bound_to_fall</span><span class="p">():</span>
+        <span class="n">event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span>
+        <span class="n">saved_event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">saved_event</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">OperationalError</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">bound_to_fall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">OperationalError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="n">saved_event</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Updated name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">saved_event</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tortoise.functions</span> <span class="kn">import</span> <span class="n">Coalesce</span><span class="p">,</span> <span class="n">Count</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Lower</span><span class="p">,</span> <span class="n">Min</span><span class="p">,</span> <span class="n">Sum</span><span class="p">,</span> <span class="n">Trim</span><span class="p">,</span> <span class="n">Upper</span>
+<span class="kn">from</span> <span class="nn">tortoise.query_utils</span> <span class="kn">import</span> <span class="n">Q</span>
+
+
+<span class="k">class</span> <span class="nc">Tournament</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Event&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">tournament</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyRelation</span><span class="p">[</span><span class="n">Tournament</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Tournament&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span>
+    <span class="p">)</span>
+    <span class="n">participants</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Team&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Team&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s2">&quot;event_team&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Team</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/runs&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">tournament</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Tournament&quot;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;great&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">tournament</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Second tournament&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot; final tournament &quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Without participants&quot;</span><span class="p">,</span> <span class="n">tournament_id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">tournament_id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">participants</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">team</span> <span class="o">=</span> <span class="n">Team</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Team </span><span class="si">{</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">team</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">participants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">participants</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">participants</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">events_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events_count__gte</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">events_count_with_filter</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="n">Q</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Tournament&quot;</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events_count_with_filter__gte</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">lowest_team_id</span><span class="o">=</span><span class="n">Min</span><span class="p">(</span><span class="s2">&quot;participants__id&quot;</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">events_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;events_count&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">tournament_test_id</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s2">&quot;tournament__id&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">clean_desciption</span><span class="o">=</span><span class="n">Coalesce</span><span class="p">(</span><span class="s2">&quot;desc&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">clean_desciption</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">trimmed_name</span><span class="o">=</span><span class="n">Trim</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">trimmed_name</span><span class="o">=</span><span class="s2">&quot;final tournament&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">name_len</span><span class="o">=</span><span class="n">Length</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">name_len__gt</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;New Tournament&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">name_lo</span><span class="o">=</span><span class="n">Lower</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name_lo</span><span class="o">=</span><span class="s2">&quot;new tournament&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">name_lo</span><span class="o">=</span><span class="n">Upper</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name_lo</span><span class="o">=</span><span class="s2">&quot;NEW TOURNAMENT&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="group-by">Group By<a class="headerlink" href="#group-by" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tortoise.functions</span> <span class="kn">import</span> <span class="n">Avg</span><span class="p">,</span> <span class="n">Count</span><span class="p">,</span> <span class="n">Sum</span>
+
+
+<span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span><span class="s2">&quot;models.Author&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;books&quot;</span><span class="p">)</span>
+    <span class="n">rating</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/runs&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Author</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;author1&quot;</span><span class="p">)</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Author</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;author2&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;book</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">rating</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;book</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="n">a2</span><span class="p">,</span> <span class="n">rating</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;count&#39;: 10}, {&#39;author_id&#39;: 2, &#39;count&#39;: 5}]</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">count__gt</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;count&#39;: 10}]</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">sum</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;sum&#39;: 45.0}, {&#39;author_id&#39;: 2, &#39;sum&#39;: 10.0}]</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">sum</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sum__gt</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;sum&#39;: 45.0}]</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">avg</span><span class="o">=</span><span class="n">Avg</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;avg&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;avg&#39;: 4.5}, {&#39;author_id&#39;: 2, &#39;avg&#39;: 2.0}]</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">avg</span><span class="o">=</span><span class="n">Avg</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">avg__gt</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;avg&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&#39;author_id&#39;: 1, &#39;avg&#39;: 4.5}]</span>
+
+    <span class="c1"># and use .values_list()</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s2">&quot;author_id&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [(1, 10), (2, 5)]</span>
+
+    <span class="c1"># group by with join</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">Book</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;author__name&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;author__name&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; [{&quot;author__name&quot;: &quot;author1&quot;, &quot;count&quot;: 10}, {&quot;author__name&quot;: &quot;author2&quot;, &quot;count&quot;: 5}]</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="filtering">Filtering<a class="headerlink" href="#filtering" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example shows some more complex querying</span>
+
+<span class="sd">Key points are filtering by related names and using Q objects</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">tortoise.query_utils</span> <span class="kn">import</span> <span class="n">Q</span>
+
+
+<span class="k">class</span> <span class="nc">Tournament</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Event&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">tournament</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyRelation</span><span class="p">[</span><span class="n">Tournament</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Tournament&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span>
+    <span class="p">)</span>
+    <span class="n">participants</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Team&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Team&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s2">&quot;event_team&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Team</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/aniket&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">tournament</span> <span class="o">=</span> <span class="n">Tournament</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tournament&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">tournament</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="n">second_tournament</span> <span class="o">=</span> <span class="n">Tournament</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tournament 2&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">second_tournament</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="n">event_first</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event_first</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">event_second</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">second_tournament</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="n">second_tournament</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">)</span>
+
+    <span class="n">team_first</span> <span class="o">=</span> <span class="n">Team</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;First&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">team_first</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">team_second</span> <span class="o">=</span> <span class="n">Team</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Second&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">team_second</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="k">await</span> <span class="n">team_first</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">event_first</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event_second</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">team_second</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Q</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="p">[</span><span class="n">event_first</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">event_second</span><span class="o">.</span><span class="n">id</span><span class="p">])</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">participants__not</span><span class="o">=</span><span class="n">team_second</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;tournament__id&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Team</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events__tournament_id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;-events__name&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events__name__in</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;-events__participants__name&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Team</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="s2">&quot;CON&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events__participants__name__startswith</span><span class="o">=</span><span class="s2">&quot;Fir&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__icontains</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example shows how relations between models work.</span>
+
+<span class="sd">Key points in this example are use of ForeignKeyField and ManyToManyField</span>
+<span class="sd">to declare relations and use of .prefetch_related() and .fetch_related()</span>
+<span class="sd">to get this related objects</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">tortoise.exceptions</span> <span class="kn">import</span> <span class="n">NoValuesFetched</span>
+
+
+<span class="k">class</span> <span class="nc">Tournament</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Event&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">tournament</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyRelation</span><span class="p">[</span><span class="n">Tournament</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Tournament&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span>
+    <span class="p">)</span>
+    <span class="n">participants</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Team&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Team&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s2">&quot;event_team&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="k">class</span> <span class="nc">Address</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+    <span class="n">street</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+
+    <span class="n">event</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">OneToOneRelation</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Event&quot;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Address(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">city</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">street</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Team</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/verloop&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">tournament</span> <span class="o">=</span> <span class="n">Tournament</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Tournament&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">tournament</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">await</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Without participants&quot;</span><span class="p">,</span> <span class="n">tournament_id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">tournament_id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="k">await</span> <span class="n">Address</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s2">&quot;Santa Monica&quot;</span><span class="p">,</span> <span class="n">street</span><span class="o">=</span><span class="s2">&quot;Ocean&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="n">event</span><span class="p">)</span>
+
+    <span class="n">participants</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">team</span> <span class="o">=</span> <span class="n">Team</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Team </span><span class="si">{</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">team</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">participants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">participants</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">participants</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">team</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">NoValuesFetched</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">async</span> <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">team</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">participants</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">team</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">participants</span><span class="o">=</span><span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span>
+            <span class="s2">&quot;participants&quot;</span><span class="p">,</span> <span class="s2">&quot;tournament&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">participants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fetch_related</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Team</span><span class="o">.</span><span class="n">fetch_for_list</span><span class="p">(</span><span class="n">participants</span><span class="p">,</span> <span class="s2">&quot;events&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Team</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events__tournament__id</span><span class="o">=</span><span class="n">tournament</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">tournament</span><span class="o">=</span><span class="n">tournament</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="k">await</span> <span class="n">Tournament</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">events__name__in</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="s2">&quot;Prod&quot;</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;-events__participants__name&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">tournament</span><span class="o">=</span><span class="s2">&quot;tournament__name&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;participants__name&quot;</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">Address</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="n">event</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
+
+    <span class="n">event_reload1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">event_reload1</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+
+    <span class="n">event_reload2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Event</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event_reload2</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="relations-with-unique-field">Relations with Unique field<a class="headerlink" href="#relations-with-unique-field" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example shows how relations between models especially unique field work.</span>
+
+<span class="sd">Key points in this example are use of ForeignKeyField and OneToOneField has to_field.</span>
+<span class="sd">For other basic parts, it is the same as relation exmaple.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">tortoise.query_utils</span> <span class="kn">import</span> <span class="n">Prefetch</span>
+
+
+<span class="k">class</span> <span class="nc">School</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">uuid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">students</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Student&quot;</span><span class="p">]</span>
+    <span class="n">principal</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Principal&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">school</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyRelation</span><span class="p">[</span><span class="n">School</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.School&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;students&quot;</span><span class="p">,</span> <span class="n">to_field</span><span class="o">=</span><span class="s2">&quot;id&quot;</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Principal</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">school</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">OneToOneRelation</span><span class="p">[</span><span class="n">School</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span>
+        <span class="s2">&quot;models.School&quot;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;principal&quot;</span><span class="p">,</span> <span class="n">to_field</span><span class="o">=</span><span class="s2">&quot;id&quot;</span>
+    <span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/forloop&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">school1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;School1&quot;</span><span class="p">)</span>
+    <span class="n">student1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sang-Heon Jeon1&quot;</span><span class="p">,</span> <span class="n">school_id</span><span class="o">=</span><span class="n">school1</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="n">student_schools</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sang-Heon Jeon1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;school__name&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">student_schools</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sang-Heon Jeon2&quot;</span><span class="p">,</span> <span class="n">school</span><span class="o">=</span><span class="n">school1</span><span class="p">)</span>
+    <span class="n">school_with_filtered</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="n">Prefetch</span><span class="p">(</span><span class="s2">&quot;students&quot;</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sang-Heon Jeon1&quot;</span><span class="p">)))</span>
+        <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">school_without_filtered</span> <span class="o">=</span> <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s2">&quot;students&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">school_with_filtered</span><span class="o">.</span><span class="n">students</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">school_without_filtered</span><span class="o">.</span><span class="n">students</span><span class="p">))</span>
+
+    <span class="n">school2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;School2&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">school</span><span class="o">=</span><span class="n">school2</span><span class="p">)</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">school_id</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">Student</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">student1</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">school</span><span class="o">=</span><span class="n">school1</span><span class="p">)</span>
+    <span class="n">schools</span> <span class="o">=</span> <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;students__name&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">school</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">school</span> <span class="ow">in</span> <span class="n">schools</span><span class="p">])</span>
+
+    <span class="n">fetched_principal</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Principal</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sang-Heon Jeon3&quot;</span><span class="p">,</span> <span class="n">school</span><span class="o">=</span><span class="n">school1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fetched_principal</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">fetched_school</span> <span class="o">=</span> <span class="k">await</span> <span class="n">School</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;School1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s2">&quot;principal&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fetched_school</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="recursive-relations">Recursive relations<a class="headerlink" href="#recursive-relations" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This example shows how self-referential (recursive) relations work.</span>
+
+<span class="sd">Key points in this example are:</span>
+<span class="sd">* Use of ForeignKeyField that refers to self</span>
+<span class="sd">* To pass in the (optional) parent node at creation</span>
+<span class="sd">* To use async iterator to fetch children</span>
+<span class="sd">* To use .fetch_related(…) to emulate sync behaviour</span>
+<span class="sd">* That insert-order gets preserved for ForeignFields, but not ManyToManyFields</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="n">manager</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyNullableRelation</span><span class="p">[</span><span class="s2">&quot;Employee&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Employee&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;team_members&quot;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">team_members</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ReverseRelation</span><span class="p">[</span><span class="s2">&quot;Employee&quot;</span><span class="p">]</span>
+
+    <span class="n">talks_to</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Employee&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span>
+        <span class="s2">&quot;models.Employee&quot;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s2">&quot;gets_talked_to&quot;</span>
+    <span class="p">)</span>
+    <span class="n">gets_talked_to</span><span class="p">:</span> <span class="n">db</span><span class="o">.</span><span class="n">ManyToManyRelation</span><span class="p">[</span><span class="s2">&quot;Employee&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">full_hierarchy__async_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Demonstrates ``async for` to fetch relations</span>
+
+<span class="sd">        An async iterator will fetch the relationship on-demand.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> (to: </span><span class="si">{}</span><span class="s2">) (from: </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">level</span> <span class="o">*</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">async</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">talks_to</span><span class="p">]),</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">async</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gets_talked_to</span><span class="p">]),</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">:</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">member</span><span class="o">.</span><span class="n">full_hierarchy__async_for</span><span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">full_hierarchy__fetch_related</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Demonstrates ``await .fetch_related`` to fetch relations</span>
+
+<span class="sd">        On prefetching the data, the relationship files will contain a regular list.</span>
+
+<span class="sd">        This is how one would get relations working on sync serialization/templating frameworks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_related</span><span class="p">(</span><span class="s2">&quot;team_members&quot;</span><span class="p">,</span> <span class="s2">&quot;talks_to&quot;</span><span class="p">,</span> <span class="s2">&quot;gets_talked_to&quot;</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2"> (to: </span><span class="si">{}</span><span class="s2">) (from: </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">level</span> <span class="o">*</span> <span class="s2">&quot;  &quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">talks_to</span><span class="p">]),</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gets_talked_to</span><span class="p">]),</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">:</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">member</span><span class="o">.</span><span class="n">full_hierarchy__fetch_related</span><span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/relationer&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">)</span>
+    <span class="n">loose</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Loose&quot;</span><span class="p">)</span>
+    <span class="n">_1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;1. First H1&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">_2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;2. Second H1&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">_1_1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;1.1. First H2&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">_1</span><span class="p">)</span>
+    <span class="n">_1_1_1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;1.1.1. First H3&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">_1_1</span><span class="p">)</span>
+    <span class="n">_2_1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;2.1. Second H2&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">_2</span><span class="p">)</span>
+    <span class="n">_2_2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;2.2. Third H2&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">_2</span><span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">_1</span><span class="o">.</span><span class="n">talks_to</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_2</span><span class="p">,</span> <span class="n">_1_1_1</span><span class="p">,</span> <span class="n">loose</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">_2_1</span><span class="o">.</span><span class="n">gets_talked_to</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_2_2</span><span class="p">,</span> <span class="n">_1_1</span><span class="p">,</span> <span class="n">loose</span><span class="p">)</span>
+
+    <span class="c1"># Evaluated off creation objects</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">loose</span><span class="o">.</span><span class="n">full_hierarchy__fetch_related</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">root</span><span class="o">.</span><span class="n">full_hierarchy__async_for</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">root</span><span class="o">.</span><span class="n">full_hierarchy__fetch_related</span><span class="p">())</span>
+
+    <span class="c1"># Evaluated off new objects → Result is identical</span>
+    <span class="n">root2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">)</span>
+    <span class="n">loose2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Employee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Loose&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">loose2</span><span class="o">.</span><span class="n">full_hierarchy__fetch_related</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">root2</span><span class="o">.</span><span class="n">full_hierarchy__async_for</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="k">await</span> <span class="n">root2</span><span class="o">.</span><span class="n">full_hierarchy__fetch_related</span><span class="p">())</span>
+    <span class="k">return</span> <span class="s1">&#39;null&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
                 
               
               
