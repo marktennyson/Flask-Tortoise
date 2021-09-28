@@ -109,7 +109,7 @@ def complete_async_func(f):
 @complete_async_func
 async def tortoise(ctx: c.Context, config="aerich.ini", app=None, name="aerich"):
     """
-    the default command line interface to manage the version of the tortoise orm.
+    The CLI to control the tortoise-orm.
     """
     ctx.ensure_object(dict)
     ctx.obj["config_file"] = config
