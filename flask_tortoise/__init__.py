@@ -485,15 +485,12 @@ class _Tortoise(object):
         @self.app.before_request
         async def init_orm() -> None: 
             await self.init_tortoise()
-            logger.info("Tortoise-ORM started, %s, %s", Tortoiser._connections, Tortoiser.apps)
             if self._generate_schemas:
-                logger.info("Tortoise-ORM generating schema")
                 await Tortoiser.generate_schemas()
 
         @self.app.teardown_request
         async def close_orm(*wargs, **kwargs):
             await Tortoiser.close_connections()
-            logger.info("Tortoise-ORM shutdown")
 
     def register_cli_interface(self):
         from .cli import tortoise 

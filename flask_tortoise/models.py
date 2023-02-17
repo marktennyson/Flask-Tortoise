@@ -3,7 +3,7 @@ from tortoise.models import (
     MetaInfo as OldMetaInfo, 
     )
 from tortoise.manager import Manager as OldManager
-from tortoise.query_utils import Q
+from tortoise.queryset import Q
 from tortoise.manager import Manager
 
 from .queryset import QuerySet
@@ -39,7 +39,7 @@ class Model(OldModel):
     @classmethod
     def get_or_404(
         cls: t.Type["MODEL"], 
-        *args: Q, 
+        *args: "Q", 
         description: t.Optional[str]=None,
         **kwargs: t.Any
         ) -> "QuerySetSingle[MODEL]":
@@ -58,8 +58,8 @@ class Model(OldModel):
 
     @classmethod
     def first_or_404(
-        cls: t.Type["MODEL"], 
-        *args: Q, 
+        cls: t.Type["MODEL"],
+        *args: "Q", 
         description: t.Optional[str]=None,
         **kwargs: t.Any
         ) -> "QuerySetSingle[MODEL]":

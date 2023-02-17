@@ -3,7 +3,7 @@ import os
 
 baseDir = os.path.dirname(os.path.abspath(__file__))
 
-VERSION_INFO = (0, 0, 1)
+VERSION_INFO = (0, 0, 2)
 AUTHOR = "Aniket Sarkar"
 
 with open(os.path.join(baseDir, "README.md"), "r") as f:
@@ -14,7 +14,7 @@ setup(
     name="Flask-Tortoise",
     version=".".join([str(v) for v in list(VERSION_INFO)]),
     url="https://github.com/marktennyson/Flask-Tortoise",
-    license="GNU General Public License v3 or later (GPLv3+)",
+    license="MIT",
     author=AUTHOR,
     author_email="aniketsarkar@yahoo.com",
     description="Adds asynchronous Tortoise ORM support for flask app.",

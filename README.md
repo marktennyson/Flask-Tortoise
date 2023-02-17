@@ -170,6 +170,6 @@ We welcome all types of contributions. If you face any issue while using this mo
 
 ### License
 
-GNU General Public License v3 or later (GPLv3+)
+[MIT](https://github.com/marktennyson/flask-mailing/blob/development/LICENSE)
 
-Copyright (c) 2021 Aniket Sarkar(aniketsarkar@yahoo.com)
+Copyright (c) 2023 Aniket Sarkar(aniketsarkar@yahoo.com)

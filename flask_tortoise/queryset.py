@@ -10,7 +10,7 @@ import typing as t
 
 if t.TYPE_CHECKING: # use this to omit the circular import issue.
     from .models import MODEL
-    from tortoise.query_utils import Q
+    from tortoise.queryset import Q
 
 class Pagination:
     """Internal helper class returned by :meth:`QuerySet.paginate`.  You
